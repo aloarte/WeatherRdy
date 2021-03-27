@@ -13,13 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge
+package com.example.wethrdy.data.bo.enums
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    // Add unit tests here
+enum class Hour(stringValue: String) {
+    ONE_AM("01:00"),
+    TWO_AM("02:00"),
+    THREE_AM("03:00"),
+    FOUR_AM("04:00"),
+    FIVE_AM("05:00"),
+    SIX_AM("06:00"),
+    SEVEN_AM("07:00"),
+    EIGHT_AM("08:00"),
+    NINE_AM("09:00"),
+    TEN_AM("10:00"),
+    ELEVEN_AM("11:00"),
+    TWELVE_AM("12:00"),
+    ONE_PM("13:00"),
+    TWO_PM("14:00"),
+    THREE_PM("15:00"),
+    FOUR_PM("16:00"),
+    FIVE_PM("17:00"),
+    SIX_PM("18:00"),
+    SEVEN_PM("19:00"),
+    EIGHT_PM("20:00"),
+    NINE_PM("21:00"),
+    TEN_PM("22:00"),
+    ELEVEN_PM("23:00"),
+    TWELVE_PM("00:00"),
 }
