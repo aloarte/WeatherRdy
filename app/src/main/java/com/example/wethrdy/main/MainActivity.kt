@@ -58,5 +58,4 @@ fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
         Spacer(modifier = Modifier.height(10.dp))
         DailyWeatherForecast(viewModel = forecastViewModel)
     }
-
 }

@@ -25,7 +25,6 @@ val purple700 = Color(0xFF558b2f)
 val teal200 = Color(0x20558b2f)
 val teal800 = Color(0xFF558b2f)
 
-
 val gray800 = Color(0xFF444444)
 val gray900 = Color(0xFF333333)
 val taupe100 = Color(0xFFF0EAE2)

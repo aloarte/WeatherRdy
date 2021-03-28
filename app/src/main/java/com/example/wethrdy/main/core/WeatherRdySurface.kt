@@ -49,9 +49,10 @@ fun WeatherRdySurface(viewModel: WeatherForecastViewModel, content: @Composable 
                 .fillMaxHeight()
                 .fillMaxWidth()
         )
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(SmallDimension)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(SmallDimension)
         ) {
             content()
         }

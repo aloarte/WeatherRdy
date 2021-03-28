@@ -50,10 +50,7 @@ fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
             DailyWeatherForecastList(dailyWeatherForecast)
         }
     }
-
-
 }
-
 
 @Composable
 fun DailyWeatherForecastList(dailyWeatherForecastList: List<DailyWeatherForecastBO>?) {
@@ -89,7 +86,5 @@ fun DailyWeatherForecastItem(forecastItem: DailyWeatherForecastBO) {
         )
         Text(forecastItem.maxTemperature.toString(), style = MaterialTheme.typography.body1)
         Text(forecastItem.minTemperature.toString(), style = MaterialTheme.typography.body1)
-
     }
 }
-

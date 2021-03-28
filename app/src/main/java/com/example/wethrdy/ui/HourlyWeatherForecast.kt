@@ -49,8 +49,6 @@ fun HourlyWeatherForecast(viewModel: WeatherForecastViewModel) {
             HourlyWeatherForecastList(hourlyWeatherForecast)
         }
     }
-
-
 }
 
 @Composable

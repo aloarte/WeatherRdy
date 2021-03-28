@@ -40,5 +40,4 @@ enum class Hour(val stringValue: String) {
     SIX_PM("18:00"),
     SEVEN_PM("19:00"),
     EIGHT_PM("20:00");
-
 }
