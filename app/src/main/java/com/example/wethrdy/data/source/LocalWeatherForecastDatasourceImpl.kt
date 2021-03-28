@@ -19,6 +19,6 @@ import com.example.wethrdy.data.WeatherForecastDTO
 
 class LocalWeatherForecastDatasourceImpl : LocalWeatherForecastSource {
     override suspend fun getForecastByLocation(city: String): WeatherForecastDTO {
-       return WeatherForecastDTO("")
+        return WeatherForecastDTO("")
     }
 }

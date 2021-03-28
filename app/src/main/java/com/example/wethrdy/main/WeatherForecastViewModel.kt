@@ -33,7 +33,7 @@ class WeatherForecastViewModel(
     private val hourlyWeatherUseCase: HourlyWeatherForecastUseCase,
     private val dailyWeatherUseCase: DailyWeatherForecastUseCase,
 
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _cities = MutableLiveData<List<String>>(listOf())
     val cities: LiveData<List<String>> = _cities
@@ -42,7 +42,6 @@ class WeatherForecastViewModel(
     val currentForecastDetail: LiveData<CurrentForecastDetailsBO>
         get() = _currentForecastDetail
 
-
     private val _hourlyForecast = MutableLiveData<List<HourlyWeatherForecastBO>>()
     val hourlyForecast: LiveData<List<HourlyWeatherForecastBO>>
         get() = _hourlyForecast
@@ -50,7 +49,6 @@ class WeatherForecastViewModel(
     private val _dailyForecast = MutableLiveData<List<DailyWeatherForecastBO>>()
     val dailyForecast: LiveData<List<DailyWeatherForecastBO>>
         get() = _dailyForecast
-
 
     private val _backgroundState = MutableLiveData<WeatherBackground>()
     val backgroundState: LiveData<WeatherBackground>

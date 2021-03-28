@@ -33,7 +33,7 @@ class WeatherRdyApplication : Application() {
                     dataSourcesModule,
                     repositoriesModule,
                     viewModelModule
-                    )
+                )
             )
         }
     }

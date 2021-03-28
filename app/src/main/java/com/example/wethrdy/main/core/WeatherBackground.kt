@@ -16,5 +16,5 @@
 package com.example.wethrdy.main.core
 
 enum class WeatherBackground {
-    Day, Night, Rain,Storm,Cloudy
+    Day, Night, Rain, Storm, Cloudy
 }

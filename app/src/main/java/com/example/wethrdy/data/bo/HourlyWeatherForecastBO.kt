@@ -17,7 +17,6 @@ package com.example.wethrdy.data.bo
 
 import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.data.bo.enums.WeatherStatus
-import java.util.Timer
 
 class HourlyWeatherForecastBO(
     val hour: Hour,

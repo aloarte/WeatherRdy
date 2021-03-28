@@ -16,7 +16,6 @@
 package com.example.wethrdy.data.source
 
 import com.example.wethrdy.data.WeatherForecastDTO
-import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
 
 interface WeatherForecastSource {
     suspend fun getForecastByLocation(city: String): WeatherForecastDTO

@@ -15,4 +15,4 @@
  */
 package com.example.wethrdy.data
 
-class WeatherForecastDTO(val name:String)
+class WeatherForecastDTO(val name: String)

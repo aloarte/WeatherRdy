@@ -51,6 +51,3 @@ fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
         DailyWeatherForecast(viewModel = forecastViewModel)
     }
 }
-
-
-

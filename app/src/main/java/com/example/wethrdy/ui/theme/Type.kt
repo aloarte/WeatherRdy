@@ -28,7 +28,7 @@ private val turretRoadFonts = FontFamily(
     Font(R.font.turretroad_medium, FontWeight.Medium),
     Font(R.font.turretroad_regular, FontWeight.Normal),
 
-    )
+)
 
 // Set of Material typography styles to start with
 val typography = Typography(
@@ -63,6 +63,6 @@ val typography = Typography(
         fontSize = 12.sp,
         letterSpacing = 1.15.sp,
 
-        )
+    )
 
 )
