@@ -21,14 +21,15 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.wethrdy.ui.theme.purple700
 import com.example.wethrdy.ui.theme.teal200
 
 @Composable
-fun ForecastSurface(content: @Composable () -> Unit) {
+fun ForecastSurface(nightMode: Boolean, content: @Composable () -> Unit) {
     Surface(
-        border = BorderStroke(1.dp, teal200),
-        contentColor = Color.Black,
-        color = teal200,
+        border = BorderStroke(1.dp, if (nightMode) purple700 else teal200),
+        contentColor = if (nightMode) Color.White else Color.Black,
+        color = if (nightMode) purple700 else teal200,
         shape = MaterialTheme.shapes.medium
     ) {
         content()
