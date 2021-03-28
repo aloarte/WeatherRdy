@@ -17,6 +17,13 @@ package com.example.wethrdy.di
 
 import com.example.wethrdy.data.repository.WeatherForecastRepository
 import com.example.wethrdy.data.repository.WeatherForecastRepositoryImpl
+import com.example.wethrdy.data.source.LocalWeatherForecastDatasourceImpl
+import com.example.wethrdy.data.source.LocalWeatherForecastSource
+import com.example.wethrdy.data.source.WeatherForecastDatasourceImpl
+import com.example.wethrdy.data.source.WeatherForecastSource
+import com.example.wethrdy.data.usecases.DailyWeatherForecastUseCase
+import com.example.wethrdy.data.usecases.DetailCurrentWeatherForecastUseCase
+import com.example.wethrdy.data.usecases.HourlyWeatherForecastUseCase
 import com.example.wethrdy.main.WeatherForecastViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -25,21 +32,21 @@ import org.koin.dsl.module
 val appModule = module {
 }
 val viewModelModule = module {
-    viewModel { WeatherForecastViewModel(get()) }
+    viewModel { WeatherForecastViewModel(get(), get(), get()) }
 }
 val dataSourcesModule = module {
-//    factory<WeatherForecastDatasource> { (WeatherForecastDatasourceLocalImpl()) }
-//    factory<WeatherForecastDatasource> { (WeatherForecastDatasourceImpl()) }
+    factory<LocalWeatherForecastSource> { (LocalWeatherForecastDatasourceImpl()) }
+    factory<WeatherForecastSource> { (WeatherForecastDatasourceImpl()) }
 }
 
-// val useCaseModule = module {
-//    factory { CurrentForecastUseCase(get()) }
-//    factory { DailyForecastUseCase(get()) }
-//    factory { HourlyForecastUseCase(get()) }
-// }
+val useCaseModule = module {
+    factory { DetailCurrentWeatherForecastUseCase(get()) }
+    factory { DailyWeatherForecastUseCase(get()) }
+    factory { HourlyWeatherForecastUseCase(get()) }
+}
 
 val repositoriesModule = module {
-    factory<WeatherForecastRepository> { WeatherForecastRepositoryImpl(/*get(), get()*/) }
+    factory<WeatherForecastRepository> { WeatherForecastRepositoryImpl(get(), get()) }
 }
 
 val networkingModule = module {

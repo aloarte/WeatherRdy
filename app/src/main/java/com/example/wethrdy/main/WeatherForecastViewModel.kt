@@ -22,13 +22,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
 import com.example.wethrdy.data.bo.DailyWeatherForecastBO
 import com.example.wethrdy.data.bo.HourlyWeatherForecastBO
-import com.example.wethrdy.data.repository.WeatherForecastRepository
+import com.example.wethrdy.data.usecases.DailyWeatherForecastUseCase
+import com.example.wethrdy.data.usecases.DetailCurrentWeatherForecastUseCase
+import com.example.wethrdy.data.usecases.HourlyWeatherForecastUseCase
 import com.example.wethrdy.main.core.WeatherBackground
 import kotlinx.coroutines.launch
 
 class WeatherForecastViewModel(
-    private val forecastRepository: WeatherForecastRepository,
-) : ViewModel() {
+    private val detailCurrentWeatherUseCase: DetailCurrentWeatherForecastUseCase,
+    private val hourlyWeatherUseCase: HourlyWeatherForecastUseCase,
+    private val dailyWeatherUseCase: DailyWeatherForecastUseCase,
+
+    ) : ViewModel() {
 
     private val _cities = MutableLiveData<List<String>>(listOf())
     val cities: LiveData<List<String>> = _cities
@@ -37,13 +42,15 @@ class WeatherForecastViewModel(
     val currentForecastDetail: LiveData<CurrentForecastDetailsBO>
         get() = _currentForecastDetail
 
-    private val _dailyForecast = MutableLiveData<DailyWeatherForecastBO>()
-    val dailyForecast: LiveData<DailyWeatherForecastBO>
+
+    private val _hourlyForecast = MutableLiveData<List<HourlyWeatherForecastBO>>()
+    val hourlyForecast: LiveData<List<HourlyWeatherForecastBO>>
+        get() = _hourlyForecast
+
+    private val _dailyForecast = MutableLiveData<List<DailyWeatherForecastBO>>()
+    val dailyForecast: LiveData<List<DailyWeatherForecastBO>>
         get() = _dailyForecast
 
-    private val _hourlyForecast = MutableLiveData<HourlyWeatherForecastBO>()
-    val hourlyForecast: LiveData<HourlyWeatherForecastBO>
-        get() = _hourlyForecast
 
     private val _backgroundState = MutableLiveData<WeatherBackground>()
     val backgroundState: LiveData<WeatherBackground>
@@ -51,5 +58,18 @@ class WeatherForecastViewModel(
 
     fun setState(newState: WeatherBackground) = viewModelScope.launch {
         _backgroundState.postValue(newState)
+    }
+
+    fun getCurrentWeatherForecast(country: String) {
+
+        detailCurrentWeatherUseCase.invoke(viewModelScope, params = country) {
+            _currentForecastDetail.value = it
+        }
+        hourlyWeatherUseCase.invoke(viewModelScope, params = country) {
+            _hourlyForecast.value = it
+        }
+        dailyWeatherUseCase.invoke(viewModelScope, params = country) {
+            _dailyForecast.value = it
+        }
     }
 }

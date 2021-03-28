@@ -17,8 +17,8 @@ package com.example.wethrdy.data.source
 
 import com.example.wethrdy.data.WeatherForecastDTO
 
-class WeatherForecastDatasourceImpl : WeatherForecastDatasource {
+class WeatherForecastDatasourceImpl : WeatherForecastSource {
     override suspend fun getForecastByLocation(city: String): WeatherForecastDTO {
-        TODO("Not yet implemented")
+        return WeatherForecastDTO("")
     }
 }

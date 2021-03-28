@@ -15,13 +15,14 @@
  */
 package com.example.wethrdy.data.bo
 
+import com.example.wethrdy.data.bo.enums.WeatherStatus
 import java.time.DayOfWeek
+import java.time.LocalDate
 
 class DailyWeatherForecastBO(
-    val day: DayOfWeek,
-    val stringDate: String,
-    val icon: Int,
-    val description: String,
-    val minTemperature: Int,
-    val maxTemperature: Int
+    val day: DayOfWeek = DayOfWeek.MONDAY,
+    val date: LocalDate? = null,
+    val status: WeatherStatus = WeatherStatus.CLEAR,
+    val minTemperature: Int = 0,
+    val maxTemperature: Int = 0
 )

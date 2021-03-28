@@ -13,14 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.p4r4d0x.edmclassifier.di
+package com.example.wethrdy.di
 
 import android.app.Application
-import com.example.wethrdy.di.appModule
-import com.example.wethrdy.di.dataSourcesModule
-import com.example.wethrdy.di.networkingModule
-import com.example.wethrdy.di.repositoriesModule
-import com.example.wethrdy.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -34,11 +29,11 @@ class WeatherRdyApplication : Application() {
                 listOf(
                     appModule,
                     networkingModule,
-                    viewModelModule,
-//                    useCaseModule,
+                    useCaseModule,
                     dataSourcesModule,
-                    repositoriesModule
-                )
+                    repositoriesModule,
+                    viewModelModule
+                    )
             )
         }
     }

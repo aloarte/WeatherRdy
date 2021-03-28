@@ -16,6 +16,7 @@
 package com.example.wethrdy.main.core
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,7 +31,7 @@ import com.example.wethrdy.R
 import com.example.wethrdy.main.WeatherForecastViewModel
 
 @Composable
-fun WeatherRdySurface(viewModel: WeatherForecastViewModel/*, content: @Composable () -> Unit*/) {
+fun WeatherRdySurface(viewModel: WeatherForecastViewModel, content: @Composable () -> Unit) {
 
     val backgroundWeatherState by viewModel.backgroundState.observeAsState()
 
@@ -46,9 +47,9 @@ fun WeatherRdySurface(viewModel: WeatherForecastViewModel/*, content: @Composabl
                 .fillMaxHeight()
                 .fillMaxWidth()
         )
-        /*Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
             content()
-        }*/
+        }
     }
 }
 

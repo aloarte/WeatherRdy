@@ -14,7 +14,7 @@
     package="com.example.wethrdy">
 
     <application
-        android:name="com.p4r4d0x.edmclassifier.di.WeatherRdyApplication"
+        android:name="com.example.wethrdy.di.WeatherRdyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

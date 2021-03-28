@@ -17,27 +17,52 @@ package com.example.wethrdy.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.wethrdy.R
+
+private val turretRoadFonts = FontFamily(
+    Font(R.font.turretroad_bold, FontWeight.Bold),
+    Font(R.font.turretroad_medium, FontWeight.Medium),
+    Font(R.font.turretroad_regular, FontWeight.Normal),
+
+    )
 
 // Set of Material typography styles to start with
 val typography = Typography(
+    h1 = TextStyle(
+        fontFamily = turretRoadFonts,
+        fontWeight = FontWeight.Medium,
+        fontSize = 28.sp,
+        letterSpacing = 1.15.sp
+
+    ),
+    h2 = TextStyle(
+        fontFamily = turretRoadFonts,
+        fontWeight = FontWeight.Medium,
+        fontSize = 15.sp,
+        letterSpacing = 1.15.sp
+    ),
     body1 = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = turretRoadFonts,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
-    )
-        /* Other default text styles to override
+    ),
     button = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
+        fontFamily = turretRoadFonts,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+        letterSpacing = 1.15.sp
+
     ),
     caption = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    )
-    */
+        fontFamily = turretRoadFonts,
+        fontWeight = FontWeight.Light,
+        fontSize = 12.sp,
+        letterSpacing = 1.15.sp,
+
+        )
+
 )

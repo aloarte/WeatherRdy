@@ -21,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import com.example.wethrdy.main.core.WeatherBackground
 import com.example.wethrdy.main.core.WeatherRdySurface
+import com.example.wethrdy.ui.CurrentForecast
+import com.example.wethrdy.ui.DailyWeatherForecast
+import com.example.wethrdy.ui.HourlyWeatherForecast
 import com.example.wethrdy.ui.theme.MyTheme
 import org.koin.android.ext.android.inject
 
@@ -35,11 +38,19 @@ class MainActivity : AppCompatActivity() {
                 WeatherRdy(viewModel)
             }
         }
-        viewModel.setState(WeatherBackground.Rain)
+        viewModel.setState(WeatherBackground.Day)
+        viewModel.getCurrentWeatherForecast("Madrid")
     }
 }
 
 @Composable
 fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
-    WeatherRdySurface(viewModel = forecastViewModel)
+    WeatherRdySurface(viewModel = forecastViewModel) {
+        CurrentForecast(viewModel = forecastViewModel)
+        HourlyWeatherForecast(viewModel = forecastViewModel)
+        DailyWeatherForecast(viewModel = forecastViewModel)
+    }
 }
+
+
+

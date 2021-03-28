@@ -13,16 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.wethrdy.data.bo
+package com.example.wethrdy.data.source
 
-import com.example.wethrdy.data.bo.enums.WeatherStatus
+import com.example.wethrdy.data.WeatherForecastDTO
+import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
 
-class CurrentForecastDetailsBO(
-    var status: WeatherStatus = WeatherStatus.CLEAR,
-    var temperature: Int = 0,
-    var maxTemperature: Int = 0,
-    var minTemperature: Int = 0,
-    var precipitation: Int = 0,
-    var wind: Int = 0,
-    var humidity: Int = 0
-)
+interface WeatherForecastSource {
+    suspend fun getForecastByLocation(city: String): WeatherForecastDTO
+}
