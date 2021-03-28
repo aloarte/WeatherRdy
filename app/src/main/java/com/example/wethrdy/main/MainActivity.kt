@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 WeatherRdy(viewModel)
             }
         }
-        viewModel.setState(WeatherBackground.Day)
+        viewModel.setState(WeatherBackground.Night)
         viewModel.getCurrentWeatherForecast("Madrid")
     }
 }

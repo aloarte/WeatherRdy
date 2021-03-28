@@ -20,6 +20,5 @@ enum class WeatherStatus {
     CLOUDY,
     SHOWERS,
     RAIN,
-    SNOW,
-    WINDY
+    SNOW
 }

@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.wethrdy.R
 import com.example.wethrdy.main.WeatherForecastViewModel
+import com.example.wethrdy.main.WeatherUtils.getBackground
 
 @Composable
 fun WeatherRdySurface(viewModel: WeatherForecastViewModel, content: @Composable () -> Unit) {
@@ -50,14 +51,5 @@ fun WeatherRdySurface(viewModel: WeatherForecastViewModel, content: @Composable 
         Column(modifier = Modifier.fillMaxSize()) {
             content()
         }
-    }
-}
-
-fun getBackground(backgroundWeatherState: WeatherBackground?): Int {
-    return when (backgroundWeatherState) {
-        WeatherBackground.Day -> R.mipmap.background_day_8bit
-        WeatherBackground.Night -> R.mipmap.background_night_8bit
-        WeatherBackground.Rain -> R.mipmap.background_rain_8bit
-        else -> R.mipmap.background_day_8bit
     }
 }

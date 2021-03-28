@@ -17,7 +17,6 @@ package com.example.wethrdy.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -36,7 +35,6 @@ fun CurrentForecast(viewModel: WeatherForecastViewModel) {
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
             .padding(top = SmallDimension, start = MediumDimension, end = MediumDimension)
     ) {
         CurrentForecastDetail(currentWeatherForecast)
