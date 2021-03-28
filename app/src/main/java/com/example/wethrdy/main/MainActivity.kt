@@ -18,7 +18,11 @@ package com.example.wethrdy.main
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.wethrdy.main.core.WeatherBackground
 import com.example.wethrdy.main.core.WeatherRdySurface
 import com.example.wethrdy.ui.CurrentForecast
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                 WeatherRdy(viewModel)
             }
         }
-        viewModel.setState(WeatherBackground.Night)
+        viewModel.setState(WeatherBackground.Day)
         viewModel.getCurrentWeatherForecast("Madrid")
     }
 }
@@ -46,8 +50,13 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
     WeatherRdySurface(viewModel = forecastViewModel) {
+        Spacer(modifier = Modifier.height(32.dp))
         CurrentForecast(viewModel = forecastViewModel)
+        Spacer(modifier = Modifier.height(32.dp))
+
         HourlyWeatherForecast(viewModel = forecastViewModel)
+        Spacer(modifier = Modifier.height(10.dp))
         DailyWeatherForecast(viewModel = forecastViewModel)
     }
+
 }

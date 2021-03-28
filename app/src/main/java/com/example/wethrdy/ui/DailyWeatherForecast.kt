@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,17 +37,21 @@ import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.main.WeatherForecastViewModel
 import com.example.wethrdy.main.WeatherUtils
 import com.example.wethrdy.ui.theme.MediumDimension
-import com.example.wethrdy.ui.theme.SmallDimension
+import com.example.wethrdy.ui.theme.TinyDimension
 
 @Composable
 fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
     val dailyWeatherForecast by viewModel.dailyForecast.observeAsState()
 
-    Column(Modifier.padding(MediumDimension)) {
-        Text("Hourly Forecast".toUpperCase())
-        DailyWeatherForecastList(dailyWeatherForecast)
-
+    ForecastSurface {
+        Column(modifier = Modifier.padding(MediumDimension)) {
+            Text("Daily Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
+            Spacer(modifier = Modifier.height(10.dp))
+            DailyWeatherForecastList(dailyWeatherForecast)
+        }
     }
+
+
 }
 
 
@@ -56,7 +61,7 @@ fun DailyWeatherForecastList(dailyWeatherForecastList: List<DailyWeatherForecast
         LazyRow {
             items(it) { data ->
                 DailyWeatherForecastItem(data)
-                if (data != it.last()) Spacer(modifier = Modifier.width(10.dp))
+                if (data != it.last()) Spacer(modifier = Modifier.width(5.dp))
             }
         }
     }
@@ -65,10 +70,11 @@ fun DailyWeatherForecastList(dailyWeatherForecastList: List<DailyWeatherForecast
 @Composable
 fun DailyWeatherForecastItem(forecastItem: DailyWeatherForecastBO) {
     Column(
-        Modifier.padding(SmallDimension),
+        Modifier.padding(TinyDimension),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(forecastItem.day.name)
+        Text(forecastItem.day.name, style = MaterialTheme.typography.h3)
+        Spacer(modifier = Modifier.height(4.dp))
         Icon(
             painter = painterResource(
                 id = WeatherUtils.getWeatherIcon(
@@ -78,11 +84,11 @@ fun DailyWeatherForecastItem(forecastItem: DailyWeatherForecastBO) {
             ),
             contentDescription = "",
             Modifier
-                .width(30.dp)
-                .height(30.dp)
+                .width(50.dp)
+                .height(50.dp)
         )
-        Text(forecastItem.maxTemperature.toString())
-        Text(forecastItem.minTemperature.toString())
+        Text(forecastItem.maxTemperature.toString(), style = MaterialTheme.typography.body1)
+        Text(forecastItem.minTemperature.toString(), style = MaterialTheme.typography.body1)
 
     }
 }

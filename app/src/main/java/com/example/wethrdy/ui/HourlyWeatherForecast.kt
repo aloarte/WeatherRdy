@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,16 +36,20 @@ import com.example.wethrdy.data.bo.HourlyWeatherForecastBO
 import com.example.wethrdy.main.WeatherForecastViewModel
 import com.example.wethrdy.main.WeatherUtils.getWeatherIcon
 import com.example.wethrdy.ui.theme.MediumDimension
-import com.example.wethrdy.ui.theme.SmallDimension
+import com.example.wethrdy.ui.theme.TinyDimension
 
 @Composable
 fun HourlyWeatherForecast(viewModel: WeatherForecastViewModel) {
     val hourlyWeatherForecast by viewModel.hourlyForecast.observeAsState()
-    Column(Modifier.padding(MediumDimension)) {
-        Text("Hourly Forecast".toUpperCase())
-        HourlyWeatherForecastList(hourlyWeatherForecast)
 
+    ForecastSurface {
+        Column(Modifier.padding(MediumDimension)) {
+            Text("Hourly Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
+            Spacer(modifier = Modifier.height(10.dp))
+            HourlyWeatherForecastList(hourlyWeatherForecast)
+        }
     }
+
 
 }
 
@@ -63,17 +68,18 @@ fun HourlyWeatherForecastList(hourlyWeatherForecastList: List<HourlyWeatherForec
 @Composable
 fun HourlyWeatherForecastItem(forecastItem: HourlyWeatherForecastBO) {
     Column(
-        Modifier.padding(SmallDimension),
+        Modifier.padding(TinyDimension),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(forecastItem.hour.stringValue)
+        Text(forecastItem.hour.stringValue, style = MaterialTheme.typography.h3)
+        Spacer(modifier = Modifier.height(4.dp))
         Icon(
             painter = painterResource(id = getWeatherIcon(forecastItem.status, forecastItem.hour)),
             contentDescription = "",
             Modifier
-                .width(30.dp)
-                .height(30.dp)
+                .width(50.dp)
+                .height(50.dp)
         )
-        Text(forecastItem.temperature.toString())
+        Text(forecastItem.temperature.toString(), style = MaterialTheme.typography.body1)
     }
 }

@@ -41,6 +41,12 @@ val typography = Typography(
     ),
     h2 = TextStyle(
         fontFamily = turretRoadFonts,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        letterSpacing = 1.15.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = turretRoadFonts,
         fontWeight = FontWeight.Medium,
         fontSize = 15.sp,
         letterSpacing = 1.15.sp
