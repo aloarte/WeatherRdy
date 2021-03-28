@@ -40,7 +40,7 @@ import com.example.wethrdy.ui.theme.MediumDimension
 import com.example.wethrdy.ui.theme.TinyDimension
 
 @Composable
-fun DailyWeatherForecast(viewModel: WeatherForecastViewModel,nightMode:Boolean) {
+fun DailyWeatherForecast(viewModel: WeatherForecastViewModel, nightMode: Boolean) {
     val dailyWeatherForecast by viewModel.dailyForecast.observeAsState()
 
     ForecastSurface(nightMode) {

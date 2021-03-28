@@ -37,26 +37,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val nightMode= false
+        val nightMode = false
         setContent {
             MyTheme {
-                WeatherRdy(viewModel,nightMode)
+                WeatherRdy(viewModel, nightMode)
             }
         }
-        viewModel.setState(if(nightMode)WeatherBackground.Night else WeatherBackground.Day)
+        viewModel.setState(if (nightMode)WeatherBackground.Night else WeatherBackground.Day)
         viewModel.getCurrentWeatherForecast("Madrid")
     }
 }
 
 @Composable
-fun WeatherRdy(forecastViewModel: WeatherForecastViewModel,nightMode:Boolean) {
+fun WeatherRdy(forecastViewModel: WeatherForecastViewModel, nightMode: Boolean) {
     WeatherRdySurface(viewModel = forecastViewModel) {
         Spacer(modifier = Modifier.height(32.dp))
         CurrentForecast(viewModel = forecastViewModel)
         Spacer(modifier = Modifier.height(32.dp))
-
-        HourlyWeatherForecast(viewModel = forecastViewModel,nightMode=nightMode)
+        HourlyWeatherForecast(viewModel = forecastViewModel, nightMode = nightMode)
         Spacer(modifier = Modifier.height(10.dp))
-        DailyWeatherForecast(viewModel = forecastViewModel,nightMode=nightMode)
+        DailyWeatherForecast(viewModel = forecastViewModel, nightMode = nightMode)
     }
 }

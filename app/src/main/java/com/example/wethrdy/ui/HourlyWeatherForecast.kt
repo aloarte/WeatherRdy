@@ -39,7 +39,7 @@ import com.example.wethrdy.ui.theme.MediumDimension
 import com.example.wethrdy.ui.theme.TinyDimension
 
 @Composable
-fun HourlyWeatherForecast(viewModel: WeatherForecastViewModel,nightMode:Boolean) {
+fun HourlyWeatherForecast(viewModel: WeatherForecastViewModel, nightMode: Boolean) {
     val hourlyWeatherForecast by viewModel.hourlyForecast.observeAsState()
 
     ForecastSurface(nightMode) {
