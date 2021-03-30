@@ -15,10 +15,18 @@
  */
 package com.example.wethrdy.main
 
+import androidx.compose.ui.graphics.Color
 import com.example.wethrdy.R
+import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
 import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.data.bo.enums.WeatherStatus
 import com.example.wethrdy.main.core.WeatherBackground
+import com.example.wethrdy.ui.theme.brownContent
+import com.example.wethrdy.ui.theme.darkGrayTransparent20
+import com.example.wethrdy.ui.theme.darkGrayTransparent40
+import com.example.wethrdy.ui.theme.grayTransparent
+import com.example.wethrdy.ui.theme.whiteIntenseTransparent
+import com.example.wethrdy.ui.theme.whiteTransparent
 
 object WeatherUtils {
 
@@ -39,10 +47,49 @@ object WeatherUtils {
 
     fun getBackground(backgroundWeatherState: WeatherBackground?): Int {
         return when (backgroundWeatherState) {
-            WeatherBackground.Day -> R.mipmap.background_day_8bit
-            WeatherBackground.Night -> R.mipmap.background_night_8bit
-            WeatherBackground.Rain -> R.mipmap.background_rain_8bit
+            WeatherBackground.DAY -> R.mipmap.background_day_8bit
+            WeatherBackground.NIGHT -> R.mipmap.background_night_8bit
+            WeatherBackground.RAIN -> R.mipmap.background_rainy_8bit
+            WeatherBackground.SNOW -> R.mipmap.background_snow_8bit
+            WeatherBackground.SNOW_NIGHT -> R.mipmap.background_snow_night_8bit
+            WeatherBackground.CLOUDY -> R.mipmap.background_cloudy_8bit
             else -> R.mipmap.background_day_8bit
+        }
+    }
+
+    fun getBackgroundState(
+        forecastDetails: CurrentForecastDetailsBO,
+        nightMode: Boolean
+    ): WeatherBackground {
+        return when (forecastDetails.status) {
+            WeatherStatus.CLEAR -> if (nightMode) WeatherBackground.NIGHT else WeatherBackground.DAY
+            WeatherStatus.SHOWERS, WeatherStatus.RAIN -> WeatherBackground.RAIN
+            WeatherStatus.CLOUDY -> WeatherBackground.CLOUDY
+            WeatherStatus.SNOW -> if (nightMode) WeatherBackground.SNOW_NIGHT else WeatherBackground.SNOW
+        }
+    }
+
+    fun getCardColorByState(backgroundWeatherState: WeatherBackground?): Color {
+        return when (backgroundWeatherState) {
+            WeatherBackground.DAY -> darkGrayTransparent20
+            WeatherBackground.NIGHT -> grayTransparent
+            WeatherBackground.RAIN -> whiteTransparent
+            WeatherBackground.SNOW -> whiteIntenseTransparent
+            WeatherBackground.SNOW_NIGHT -> grayTransparent
+            WeatherBackground.CLOUDY -> darkGrayTransparent40
+            else -> Color.Black
+        }
+    }
+
+    fun getContentColorByState(backgroundWeatherState: WeatherBackground?): Color {
+        return when (backgroundWeatherState) {
+            WeatherBackground.DAY -> Color.Black
+            WeatherBackground.NIGHT -> Color.White
+            WeatherBackground.RAIN -> Color.White
+            WeatherBackground.SNOW -> brownContent
+            WeatherBackground.SNOW_NIGHT -> Color.White
+            WeatherBackground.CLOUDY -> Color.White
+            else -> Color.Black
         }
     }
 }

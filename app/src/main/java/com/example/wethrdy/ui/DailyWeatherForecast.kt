@@ -40,10 +40,11 @@ import com.example.wethrdy.ui.theme.MediumDimension
 import com.example.wethrdy.ui.theme.TinyDimension
 
 @Composable
-fun DailyWeatherForecast(viewModel: WeatherForecastViewModel, nightMode: Boolean) {
+fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
     val dailyWeatherForecast by viewModel.dailyForecast.observeAsState()
+    val backgroundWeatherState by viewModel.backgroundState.observeAsState()
 
-    ForecastSurface(nightMode) {
+    ForecastSurface(backgroundWeatherState) {
         Column(modifier = Modifier.padding(MediumDimension)) {
             Text("Daily Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
             Spacer(modifier = Modifier.height(10.dp))

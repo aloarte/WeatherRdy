@@ -19,17 +19,24 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.wethrdy.ui.theme.purple700
-import com.example.wethrdy.ui.theme.teal200
+import com.example.wethrdy.main.WeatherUtils.getCardColorByState
+import com.example.wethrdy.main.WeatherUtils.getContentColorByState
+import com.example.wethrdy.main.core.WeatherBackground
 
 @Composable
-fun ForecastSurface(nightMode: Boolean, content: @Composable () -> Unit) {
+fun ForecastSurface(
+    backgroundWeatherState: WeatherBackground?,
+    content: @Composable () -> Unit
+) {
+
+    val contentColor = getContentColorByState(backgroundWeatherState)
+    val cardColor = getCardColorByState(backgroundWeatherState)
+
     Surface(
-        border = BorderStroke(1.dp, if (nightMode) purple700 else teal200),
-        contentColor = if (nightMode) Color.White else Color.Black,
-        color = if (nightMode) purple700 else teal200,
+        border = BorderStroke(1.dp, cardColor),
+        contentColor = contentColor,
+        color = cardColor,
         shape = MaterialTheme.shapes.medium
     ) {
         content()

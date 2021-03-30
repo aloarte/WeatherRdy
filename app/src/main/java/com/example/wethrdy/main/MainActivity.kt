@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.wethrdy.main.core.WeatherBackground
 import com.example.wethrdy.main.core.WeatherRdySurface
 import com.example.wethrdy.ui.CurrentForecast
 import com.example.wethrdy.ui.DailyWeatherForecast
@@ -37,25 +36,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val nightMode = false
+        val nightMode = true
         setContent {
             MyTheme {
-                WeatherRdy(viewModel, nightMode)
+                WeatherRdy(viewModel)
             }
         }
-        viewModel.setState(if (nightMode)WeatherBackground.Night else WeatherBackground.Day)
-        viewModel.getCurrentWeatherForecast("Madrid")
+        viewModel.getCurrentWeatherForecast("Madrid", nightMode)
     }
 }
 
 @Composable
-fun WeatherRdy(forecastViewModel: WeatherForecastViewModel, nightMode: Boolean) {
+fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
     WeatherRdySurface(viewModel = forecastViewModel) {
         Spacer(modifier = Modifier.height(32.dp))
         CurrentForecast(viewModel = forecastViewModel)
         Spacer(modifier = Modifier.height(32.dp))
-        HourlyWeatherForecast(viewModel = forecastViewModel, nightMode = nightMode)
+        HourlyWeatherForecast(viewModel = forecastViewModel)
         Spacer(modifier = Modifier.height(10.dp))
-        DailyWeatherForecast(viewModel = forecastViewModel, nightMode = nightMode)
+        DailyWeatherForecast(viewModel = forecastViewModel)
     }
 }
