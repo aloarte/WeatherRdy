@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.wethrdy.main
+package com.example.wethrdy.main.core
 
 import androidx.compose.ui.graphics.Color
 import com.example.wethrdy.R
 import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
 import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.data.bo.enums.WeatherStatus
-import com.example.wethrdy.main.core.WeatherBackground
 import com.example.wethrdy.ui.theme.brownContent
 import com.example.wethrdy.ui.theme.darkGrayTransparent20
 import com.example.wethrdy.ui.theme.darkGrayTransparent40

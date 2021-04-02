@@ -24,9 +24,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.wethrdy.main.core.WeatherRdySurface
-import com.example.wethrdy.ui.CurrentForecast
-import com.example.wethrdy.ui.DailyWeatherForecast
-import com.example.wethrdy.ui.HourlyWeatherForecast
+import com.example.wethrdy.ui.main.CurrentForecast
+import com.example.wethrdy.ui.main.DailyWeatherForecast
+import com.example.wethrdy.ui.main.HourlyWeatherForecast
 import com.example.wethrdy.ui.theme.MyTheme
 import org.koin.android.ext.android.inject
 

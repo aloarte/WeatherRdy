@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.wethrdy.ui
+package com.example.wethrdy.ui.main
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -27,16 +26,12 @@ import androidx.compose.ui.Modifier
 import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
 import com.example.wethrdy.main.WeatherForecastViewModel
 import com.example.wethrdy.ui.theme.MediumDimension
-import com.example.wethrdy.ui.theme.SmallDimension
 
 @Composable
 fun CurrentForecast(viewModel: WeatherForecastViewModel) {
     val currentWeatherForecast by viewModel.currentForecastDetail.observeAsState()
-
-    Box(
-        modifier = Modifier
-            .padding(top = SmallDimension, start = MediumDimension, end = MediumDimension)
-    ) {
+    val backgroundWeatherState by viewModel.backgroundState.observeAsState()
+    ForecastSurface(Modifier.padding(MediumDimension), backgroundWeatherState) {
         CurrentForecastDetail(currentWeatherForecast)
     }
 }

@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.wethrdy.ui
+package com.example.wethrdy.ui.main
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.wethrdy.main.WeatherUtils.getCardColorByState
-import com.example.wethrdy.main.WeatherUtils.getContentColorByState
 import com.example.wethrdy.main.core.WeatherBackground
+import com.example.wethrdy.main.core.WeatherUtils.getCardColorByState
+import com.example.wethrdy.main.core.WeatherUtils.getContentColorByState
 
 @Composable
 fun ForecastSurface(
+    modifier: Modifier = Modifier,
     backgroundWeatherState: WeatherBackground?,
     content: @Composable () -> Unit
 ) {
@@ -34,6 +36,7 @@ fun ForecastSurface(
     val cardColor = getCardColorByState(backgroundWeatherState)
 
     Surface(
+        modifier = modifier,
         border = BorderStroke(1.dp, cardColor),
         contentColor = contentColor,
         color = cardColor,

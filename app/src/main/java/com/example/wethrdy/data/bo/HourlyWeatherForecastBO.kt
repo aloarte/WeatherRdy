@@ -21,5 +21,5 @@ import com.example.wethrdy.data.bo.enums.WeatherStatus
 class HourlyWeatherForecastBO(
     val hour: Hour,
     val status: WeatherStatus,
-    val temperature: Int,
+    val temperature: TemperaturePair = TemperaturePair(0, 0)
 )

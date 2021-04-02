@@ -25,8 +25,8 @@ import com.example.wethrdy.data.bo.HourlyWeatherForecastBO
 import com.example.wethrdy.data.usecases.DailyWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.DetailCurrentWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.HourlyWeatherForecastUseCase
-import com.example.wethrdy.main.WeatherUtils.getBackgroundState
 import com.example.wethrdy.main.core.WeatherBackground
+import com.example.wethrdy.main.core.WeatherUtils.getBackgroundState
 import kotlinx.coroutines.launch
 
 class WeatherForecastViewModel(

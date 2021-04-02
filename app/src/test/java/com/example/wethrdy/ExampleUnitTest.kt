@@ -20,6 +20,4 @@ package com.example.wethrdy
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
-    // Add unit tests here
-}
+class ExampleUnitTest

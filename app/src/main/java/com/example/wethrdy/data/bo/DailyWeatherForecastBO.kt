@@ -23,6 +23,5 @@ class DailyWeatherForecastBO(
     val day: DayOfWeek = DayOfWeek.MONDAY,
     val date: LocalDate? = null,
     val status: WeatherStatus = WeatherStatus.CLEAR,
-    val minTemperature: Int = 0,
-    val maxTemperature: Int = 0
+    val temperature: TemperaturePair = TemperaturePair(0, 0)
 )

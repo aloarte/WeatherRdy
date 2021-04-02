@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.wethrdy.ui
+package com.example.wethrdy.ui.main
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -32,60 +32,56 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.wethrdy.data.bo.DailyWeatherForecastBO
-import com.example.wethrdy.data.bo.enums.Hour
+import com.example.wethrdy.data.bo.HourlyWeatherForecastBO
 import com.example.wethrdy.main.WeatherForecastViewModel
-import com.example.wethrdy.main.WeatherUtils
+import com.example.wethrdy.main.core.WeatherUtils.getWeatherIcon
 import com.example.wethrdy.ui.theme.MediumDimension
 import com.example.wethrdy.ui.theme.TinyDimension
 
 @Composable
-fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
-    val dailyWeatherForecast by viewModel.dailyForecast.observeAsState()
+fun HourlyWeatherForecast(viewModel: WeatherForecastViewModel) {
+    val hourlyWeatherForecast by viewModel.hourlyForecast.observeAsState()
     val backgroundWeatherState by viewModel.backgroundState.observeAsState()
 
-    ForecastSurface(backgroundWeatherState) {
-        Column(modifier = Modifier.padding(MediumDimension)) {
-            Text("Daily Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
+    ForecastSurface(backgroundWeatherState = backgroundWeatherState) {
+        Column(Modifier.padding(MediumDimension)) {
+            Text("Hourly Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
             Spacer(modifier = Modifier.height(10.dp))
-            DailyWeatherForecastList(dailyWeatherForecast)
+            HourlyWeatherForecastList(hourlyWeatherForecast)
         }
     }
 }
 
 @Composable
-fun DailyWeatherForecastList(dailyWeatherForecastList: List<DailyWeatherForecastBO>?) {
-    dailyWeatherForecastList?.let {
+fun HourlyWeatherForecastList(hourlyWeatherForecastList: List<HourlyWeatherForecastBO>?) {
+    hourlyWeatherForecastList?.let {
         LazyRow {
             items(it) { data ->
-                DailyWeatherForecastItem(data)
-                if (data != it.last()) Spacer(modifier = Modifier.width(5.dp))
+                HourlyWeatherForecastItem(data)
+                if (data != it.last()) Spacer(modifier = Modifier.width(10.dp))
             }
         }
     }
 }
 
 @Composable
-fun DailyWeatherForecastItem(forecastItem: DailyWeatherForecastBO) {
+fun HourlyWeatherForecastItem(forecastItem: HourlyWeatherForecastBO) {
     Column(
         Modifier.padding(TinyDimension),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(forecastItem.day.name, style = MaterialTheme.typography.h3)
+        Text(forecastItem.hour.stringValue, style = MaterialTheme.typography.h3)
         Spacer(modifier = Modifier.height(4.dp))
         Icon(
-            painter = painterResource(
-                id = WeatherUtils.getWeatherIcon(
-                    forecastItem.status,
-                    Hour.TWELVE_AM
-                )
-            ),
+            painter = painterResource(id = getWeatherIcon(forecastItem.status, forecastItem.hour)),
             contentDescription = "",
             Modifier
                 .width(50.dp)
                 .height(50.dp)
         )
-        Text(forecastItem.maxTemperature.toString(), style = MaterialTheme.typography.body1)
-        Text(forecastItem.minTemperature.toString(), style = MaterialTheme.typography.body1)
+        Text(
+            forecastItem.temperature.minTemperature.toString(),
+            style = MaterialTheme.typography.body1
+        )
     }
 }
