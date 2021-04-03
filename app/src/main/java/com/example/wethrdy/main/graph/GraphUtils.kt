@@ -30,7 +30,7 @@ object GraphUtils {
         const val heightInterval = 200
     }
 
-    fun computeDailyWeatherCurvePoints(
+    fun computeTemperaturePairCurvePoints(
         temperaturePairs: List<TemperaturePair>,
         maxTemperature: Boolean
     ): GraphCurvePoints {

@@ -71,11 +71,11 @@ fun DailyWeatherGraph(dailyWeatherForecast: List<DailyWeatherForecastBO>?) {
             val temperaturePairs = dailyForecast.map { it.temperature }
             TemperatureGraph(
                 temperaturePairs = temperaturePairs,
-                maxTemperaturePoints = GraphUtils.computeDailyWeatherCurvePoints(
+                maxTemperaturePoints = GraphUtils.computeTemperaturePairCurvePoints(
                     temperaturePairs,
                     true
                 ),
-                minTemperaturePoints = GraphUtils.computeDailyWeatherCurvePoints(
+                minTemperaturePoints = GraphUtils.computeTemperaturePairCurvePoints(
                     temperaturePairs,
                     false
                 )
