@@ -72,10 +72,10 @@ object WeatherUtils {
         return when (backgroundWeatherState) {
             WeatherBackground.DAY -> darkGrayTransparent20
             WeatherBackground.NIGHT -> grayTransparent
-            WeatherBackground.RAIN -> whiteTransparent
+            WeatherBackground.RAIN -> darkGrayTransparent40
             WeatherBackground.SNOW -> whiteIntenseTransparent
             WeatherBackground.SNOW_NIGHT -> grayTransparent
-            WeatherBackground.CLOUDY -> darkGrayTransparent40
+            WeatherBackground.CLOUDY -> whiteTransparent
             else -> Color.Black
         }
     }

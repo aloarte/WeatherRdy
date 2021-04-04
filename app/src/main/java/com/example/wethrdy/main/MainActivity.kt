@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
     WeatherRdySurface(viewModel = forecastViewModel) {
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         CurrentForecast(viewModel = forecastViewModel)
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         HourlyWeatherForecast(viewModel = forecastViewModel)
         Spacer(modifier = Modifier.height(10.dp))
         DailyWeatherForecast(viewModel = forecastViewModel)

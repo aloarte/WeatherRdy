@@ -22,7 +22,6 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -63,8 +62,7 @@ fun TemperatureGraph(
 
     val curveColorMax = colorMaxTemperature
     val curveColorMin = colorMinTemperature
-    val leyendColor = getContentColorByState(weatherBackground)
-    val onBackgroundColor = MaterialTheme.colors.onBackground.copy(alpha = 0.7f)
+    val weatherColor = getContentColorByState(weatherBackground)
     val chartHeight = heightInterval
     val dpPerCell = cellSize
     val canvasWidth = dpPerCell.dp * (weatherValues.size + 1)
@@ -147,7 +145,7 @@ fun TemperatureGraph(
                     )
 
                     drawLine(
-                        color = onBackgroundColor,
+                        color = weatherColor,
                         pathEffect = PathEffect.dashPathEffect(
                             dashIntervals,
                             dashPhase
@@ -181,16 +179,16 @@ fun TemperatureGraph(
                                 textSize = 54f
                                 color = curveColorMax.toArgb()
                             }
-                            val leyendPaint = Paint().apply {
+                            val weatherPaint = Paint().apply {
                                 typeface = font
                                 textAlign = Paint.Align.CENTER
                                 textSize = 54f
-                                color = leyendColor.toArgb()
+                                color = weatherColor.toArgb()
                             }
-                            val leyendIconPaint = Paint().apply {
+                            val iconPaint = Paint().apply {
                                 style = Paint.Style.FILL
                                 colorFilter = PorterDuffColorFilter(
-                                    leyendColor.toArgb(),
+                                    weatherColor.toArgb(),
                                     PorterDuff.Mode.SRC_IN
                                 )
                             }
@@ -200,7 +198,7 @@ fun TemperatureGraph(
                                     hour.stringValue,
                                     maxTPoints[i].x,
                                     50F,
-                                    leyendPaint
+                                    weatherPaint
                                 )
                                 // Draw hour
                                 canvas.nativeCanvas.drawBitmap(
@@ -210,10 +208,10 @@ fun TemperatureGraph(
                                             status,
                                             Hour.TWELVE_AM
                                         )
-                                    )!!.toBitmap(150, 150),
+                                    )!!.toBitmap(140, 140),
                                     maxTPoints[i].x - 70,
                                     80F,
-                                    leyendIconPaint
+                                    iconPaint
                                 )
                                 // Draw max temperature
                                 canvas.nativeCanvas.drawText(
@@ -250,7 +248,7 @@ fun TemperatureGraph(
                     )
 
                     drawLine(
-                        color = onBackgroundColor,
+                        color = weatherColor,
                         pathEffect = PathEffect.dashPathEffect(
                             dashIntervals,
                             dashPhase

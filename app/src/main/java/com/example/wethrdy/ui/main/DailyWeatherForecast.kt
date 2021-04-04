@@ -47,7 +47,7 @@ fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
     ForecastSurface(backgroundWeatherState = backgroundWeatherState) {
         Column(modifier = Modifier.padding(MediumDimension)) {
             Text("Daily Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             DailyWeatherForecastList(dailyWeatherForecast)
         }
     }

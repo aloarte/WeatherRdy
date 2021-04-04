@@ -52,8 +52,7 @@ fun HourlyWeatherForecast(viewModel: WeatherForecastViewModel) {
     ForecastSurface(backgroundWeatherState = backgroundWeatherState) {
         Column(Modifier.padding(MediumDimension)) {
             Text("Hourly Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
-            Spacer(modifier = Modifier.height(10.dp))
-//            HourlyWeatherForecastList(hourlyWeatherForecast)
+            Spacer(modifier = Modifier.height(20.dp))
             HourlyWeatherGraph(hourlyWeatherForecast, backgroundWeatherState)
         }
     }

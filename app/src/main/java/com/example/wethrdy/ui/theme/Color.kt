@@ -23,13 +23,13 @@ val teal200 = Color(0x20558b2f)
 val colorMinTemperature = Color(0xFF0097a7)
 val colorMaxTemperature = Color(0xFFfbc02d)
 
-val grayTransparent = Color(0x20fafafa)
-val whiteTransparent = Color(0x50fafafa)
+val grayTransparent = Color(0x15fafafa)
+val whiteTransparent = Color(0x20fafafa)
 
 val whiteIntenseTransparent = Color(0xBBfafafa)
 
 val brownContent = Color(0xFF3e2723)
-val darkGrayTransparent40 = Color(0x40707070)
+val darkGrayTransparent40 = Color(0x60707070)
 val darkGrayTransparent20 = Color(0x20707070)
 
 // val whiteContent = Color(0xffffffff)
