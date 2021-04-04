@@ -15,13 +15,13 @@
  */
 package com.example.wethrdy.data.usecases
 
-import com.example.wethrdy.data.bo.DailyWeatherForecastBO
+import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.data.repository.WeatherForecastRepository
 
 class DailyWeatherForecastUseCase(private val repository: WeatherForecastRepository) :
-    BaseUseCase<String, List<DailyWeatherForecastBO>>() {
+    BaseUseCase<String, List<WeatherForecastBO>>() {
 
-    override suspend fun run(params: String): List<DailyWeatherForecastBO> {
+    override suspend fun run(params: String): List<WeatherForecastBO> {
         return repository.getDailyForecast(params)
     }
 }

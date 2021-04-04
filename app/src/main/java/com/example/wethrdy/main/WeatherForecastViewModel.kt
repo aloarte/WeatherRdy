@@ -19,9 +19,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
-import com.example.wethrdy.data.bo.DailyWeatherForecastBO
-import com.example.wethrdy.data.bo.HourlyWeatherForecastBO
+import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.data.usecases.DailyWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.DetailCurrentWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.HourlyWeatherForecastUseCase
@@ -39,16 +37,16 @@ class WeatherForecastViewModel(
     private val _cities = MutableLiveData<List<String>>(listOf())
     val cities: LiveData<List<String>> = _cities
 
-    private val _currentForecastDetail = MutableLiveData<CurrentForecastDetailsBO>()
-    val currentForecastDetail: LiveData<CurrentForecastDetailsBO>
+    private val _currentForecastDetail = MutableLiveData<WeatherForecastBO>()
+    val currentForecastDetail: LiveData<WeatherForecastBO>
         get() = _currentForecastDetail
 
-    private val _hourlyForecast = MutableLiveData<List<HourlyWeatherForecastBO>>()
-    val hourlyForecast: LiveData<List<HourlyWeatherForecastBO>>
+    private val _hourlyForecast = MutableLiveData<List<WeatherForecastBO>>()
+    val hourlyForecast: LiveData<List<WeatherForecastBO>>
         get() = _hourlyForecast
 
-    private val _dailyForecast = MutableLiveData<List<DailyWeatherForecastBO>>()
-    val dailyForecast: LiveData<List<DailyWeatherForecastBO>>
+    private val _dailyForecast = MutableLiveData<List<WeatherForecastBO>>()
+    val dailyForecast: LiveData<List<WeatherForecastBO>>
         get() = _dailyForecast
 
     private val _backgroundState = MutableLiveData<WeatherBackground>()

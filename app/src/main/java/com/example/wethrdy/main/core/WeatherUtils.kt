@@ -17,7 +17,7 @@ package com.example.wethrdy.main.core
 
 import androidx.compose.ui.graphics.Color
 import com.example.wethrdy.R
-import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
+import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.data.bo.enums.WeatherStatus
 import com.example.wethrdy.ui.theme.brownContent
@@ -57,7 +57,7 @@ object WeatherUtils {
     }
 
     fun getBackgroundState(
-        forecastDetails: CurrentForecastDetailsBO,
+        forecastDetails: WeatherForecastBO,
         nightMode: Boolean
     ): WeatherBackground {
         return when (forecastDetails.status) {

@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.wethrdy.ui
+package com.example.wethrdy.ui.main
 
 import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -33,29 +36,41 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.example.wethrdy.R
-import com.example.wethrdy.data.bo.TemperaturePair
+import com.example.wethrdy.data.bo.TemperaturePairBO
+import com.example.wethrdy.data.bo.WeatherForecastBO
+import com.example.wethrdy.data.bo.enums.Hour
+import com.example.wethrdy.data.bo.enums.WeatherStatus
+import com.example.wethrdy.main.core.WeatherBackground
+import com.example.wethrdy.main.core.WeatherUtils
+import com.example.wethrdy.main.core.WeatherUtils.getContentColorByState
 import com.example.wethrdy.main.graph.GraphCurvePoints
 import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.cellSize
 import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.heightInterval
 import com.example.wethrdy.main.graph.GraphUtils.computeTemperaturePairCurvePoints
 import com.example.wethrdy.ui.theme.colorMaxTemperature
 import com.example.wethrdy.ui.theme.colorMinTemperature
+import java.time.DayOfWeek
 
 @Composable
 fun TemperatureGraph(
-    temperaturePairs: List<TemperaturePair>,
+    weatherValues: List<WeatherForecastBO>,
     minTemperaturePoints: GraphCurvePoints,
-    maxTemperaturePoints: GraphCurvePoints
+    maxTemperaturePoints: GraphCurvePoints,
+    weatherBackground: WeatherBackground
 ) {
 
     val curveColorMax = colorMaxTemperature
     val curveColorMin = colorMinTemperature
+    val leyendColor = getContentColorByState(weatherBackground)
     val onBackgroundColor = MaterialTheme.colors.onBackground.copy(alpha = 0.7f)
     val chartHeight = heightInterval
     val dpPerCell = cellSize
-    val canvasWidth = dpPerCell.dp * (temperaturePairs.size + 1)
-    val font = ResourcesCompat.getFont(LocalContext.current, R.font.turretroad_regular)
+    val canvasWidth = dpPerCell.dp * (weatherValues.size + 1)
+    val context = LocalContext.current
+    val font = ResourcesCompat.getFont(context, R.font.turretroad_regular)
+
     Canvas(
         modifier = Modifier
             .height(chartHeight.dp)
@@ -82,7 +97,6 @@ fun TemperatureGraph(
                         y = it.y.dp.toPx()
                     )
                 }
-
             val minTPoints = minTemperaturePoints.points.map {
                 it.copy(
                     x = it.x.dp.toPx(),
@@ -159,22 +173,56 @@ fun TemperatureGraph(
                         )
                     }
 
-                    val hourWeather = temperaturePairs.getOrNull(i - 1)
-
-                    if (hourWeather != null) {
-                        val paint = Paint().apply {
-                            typeface = font
-                            textAlign = Paint.Align.CENTER
-                            textSize = 54f
-                            color = curveColorMax.toArgb()
-                        }
-                        drawIntoCanvas { canvas ->
-                            canvas.nativeCanvas.drawText(
-                                hourWeather.maxTemperature.toString() + "°",
-                                maxTPoints[i].x,
-                                maxTPoints[i].y - 50,
-                                paint
-                            )
+                    with(weatherValues.getOrNull(i - 1)) {
+                        if (this != null) {
+                            val paint = Paint().apply {
+                                typeface = font
+                                textAlign = Paint.Align.CENTER
+                                textSize = 54f
+                                color = curveColorMax.toArgb()
+                            }
+                            val leyendPaint = Paint().apply {
+                                typeface = font
+                                textAlign = Paint.Align.CENTER
+                                textSize = 54f
+                                color = leyendColor.toArgb()
+                            }
+                            val leyendIconPaint = Paint().apply {
+                                style = Paint.Style.FILL
+                                colorFilter = PorterDuffColorFilter(
+                                    leyendColor.toArgb(),
+                                    PorterDuff.Mode.SRC_IN
+                                )
+                            }
+                            drawIntoCanvas { canvas ->
+                                // Draw hour
+                                canvas.nativeCanvas.drawText(
+                                    hour.stringValue,
+                                    maxTPoints[i].x,
+                                    50F,
+                                    leyendPaint
+                                )
+                                // Draw hour
+                                canvas.nativeCanvas.drawBitmap(
+                                    getDrawable(
+                                        context,
+                                        WeatherUtils.getWeatherIcon(
+                                            status,
+                                            Hour.TWELVE_AM
+                                        )
+                                    )!!.toBitmap(150, 150),
+                                    maxTPoints[i].x - 70,
+                                    80F,
+                                    leyendIconPaint
+                                )
+                                // Draw max temperature
+                                canvas.nativeCanvas.drawText(
+                                    temperature.maxTemperature.toString() + "°",
+                                    maxTPoints[i].x,
+                                    maxTPoints[i].y - 50,
+                                    paint
+                                )
+                            }
                         }
                     }
                 }
@@ -228,22 +276,22 @@ fun TemperatureGraph(
                         )
                     }
 
-                    val hourWeather = temperaturePairs.getOrNull(i - 1)
-
-                    if (hourWeather != null) {
-                        val paint = Paint().apply {
-                            typeface = font
-                            textAlign = Paint.Align.CENTER
-                            textSize = 54f
-                            color = curveColorMin.toArgb()
-                        }
-                        drawIntoCanvas { canvas ->
-                            canvas.nativeCanvas.drawText(
-                                hourWeather.minTemperature.toString() + "°",
-                                minTPoints[i].x,
-                                minTPoints[i].y + 60f,
-                                paint
-                            )
+                    with(weatherValues.getOrNull(i - 1)) {
+                        if (this != null) {
+                            val paint = Paint().apply {
+                                typeface = font
+                                textAlign = Paint.Align.CENTER
+                                textSize = 54f
+                                color = curveColorMin.toArgb()
+                            }
+                            drawIntoCanvas { canvas ->
+                                canvas.nativeCanvas.drawText(
+                                    temperature.minTemperature.toString() + "°",
+                                    minTPoints[i].x,
+                                    minTPoints[i].y + 60f,
+                                    paint
+                                )
+                            }
                         }
                     }
                 }
@@ -256,12 +304,17 @@ fun TemperatureGraph(
 @Preview
 @Composable
 fun HourlyWeatherCurvePreview() {
-    val weatherPerHour = mutableListOf<TemperaturePair>()
+    val weatherPerHour = mutableListOf<WeatherForecastBO>()
     (1..3).forEach { _ ->
         weatherPerHour.add(
-            TemperaturePair(
-                minTemperature = (-1..10).random(),
-                maxTemperature = (12..30).random()
+            WeatherForecastBO(
+                day = DayOfWeek.MONDAY,
+                hour = Hour.TWELVE_AM,
+                status = WeatherStatus.RAIN,
+                temperature = TemperaturePairBO(
+                    minTemperature = (-1..10).random(),
+                    maxTemperature = (12..30).random()
+                )
             )
         )
     }
@@ -269,6 +322,7 @@ fun HourlyWeatherCurvePreview() {
     TemperatureGraph(
         weatherPerHour,
         maxTemperaturePoints = computeTemperaturePairCurvePoints(weatherPerHour, true),
-        minTemperaturePoints = computeTemperaturePairCurvePoints(weatherPerHour, false)
+        minTemperaturePoints = computeTemperaturePairCurvePoints(weatherPerHour, false),
+        weatherBackground = WeatherBackground.DAY
     )
 }

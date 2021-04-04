@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                 WeatherRdy(viewModel)
             }
         }
+
         viewModel.getCurrentWeatherForecast("Madrid", nightMode)
     }
 }

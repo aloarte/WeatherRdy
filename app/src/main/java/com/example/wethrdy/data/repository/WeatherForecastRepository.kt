@@ -15,15 +15,13 @@
  */
 package com.example.wethrdy.data.repository
 
-import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
-import com.example.wethrdy.data.bo.DailyWeatherForecastBO
-import com.example.wethrdy.data.bo.HourlyWeatherForecastBO
+import com.example.wethrdy.data.bo.WeatherForecastBO
 
 interface WeatherForecastRepository {
 
-    suspend fun getCurrentForecastDetails(city: String): CurrentForecastDetailsBO
+    suspend fun getCurrentForecastDetails(city: String): WeatherForecastBO
 
-    suspend fun getDailyForecast(city: String): List<DailyWeatherForecastBO>
+    suspend fun getDailyForecast(city: String): List<WeatherForecastBO>
 
-    suspend fun getHourlyForecast(city: String): List<HourlyWeatherForecastBO>
+    suspend fun getHourlyForecast(city: String): List<WeatherForecastBO>
 }

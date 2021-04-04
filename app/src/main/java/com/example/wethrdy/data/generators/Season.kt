@@ -13,13 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.wethrdy.data.bo
+package com.example.wethrdy.data.generators
 
-import com.example.wethrdy.data.bo.enums.Hour
-import com.example.wethrdy.data.bo.enums.WeatherStatus
-
-class HourlyWeatherForecastBO(
-    val hour: Hour,
-    val status: WeatherStatus,
-    val temperature: TemperaturePair = TemperaturePair(0, 0)
-)
+enum class Season {
+    SPRING, SUMMER, AUTUMN, WINTER
+}

@@ -15,13 +15,17 @@
  */
 package com.example.wethrdy.data.bo
 
+import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.data.bo.enums.WeatherStatus
+import java.time.DayOfWeek
+import java.time.LocalDate
 
-class CurrentForecastDetailsBO(
-    var status: WeatherStatus = WeatherStatus.CLEAR,
-    var temperature: Int = 0,
-    var maxTemperature: Int = 0,
-    var minTemperature: Int = 0,
+class WeatherForecastBO(
+    val day: DayOfWeek = DayOfWeek.MONDAY,
+    val date: LocalDate = LocalDate.now(),
+    val hour: Hour = Hour.TWELVE_AM,
+    val status: WeatherStatus = WeatherStatus.CLEAR,
+    val temperature: TemperaturePairBO = TemperaturePairBO(0, 0),
     var precipitation: Int = 0,
     var wind: Int = 0,
     var humidity: Int = 0

@@ -15,17 +15,13 @@
  */
 package com.example.wethrdy.ui.main
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -36,12 +32,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.wethrdy.data.bo.DailyWeatherForecastBO
+import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.main.WeatherForecastViewModel
 import com.example.wethrdy.main.core.WeatherUtils
-import com.example.wethrdy.main.graph.GraphUtils
-import com.example.wethrdy.ui.TemperatureGraph
 import com.example.wethrdy.ui.theme.MediumDimension
 import com.example.wethrdy.ui.theme.TinyDimension
 
@@ -55,37 +49,12 @@ fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
             Text("Daily Forecast".toUpperCase(), style = MaterialTheme.typography.h2)
             Spacer(modifier = Modifier.height(10.dp))
             DailyWeatherForecastList(dailyWeatherForecast)
-            DailyWeatherGraph(dailyWeatherForecast)
         }
     }
 }
 
 @Composable
-fun DailyWeatherGraph(dailyWeatherForecast: List<DailyWeatherForecastBO>?) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState())
-    ) {
-        dailyWeatherForecast?.let { dailyForecast ->
-            val temperaturePairs = dailyForecast.map { it.temperature }
-            TemperatureGraph(
-                temperaturePairs = temperaturePairs,
-                maxTemperaturePoints = GraphUtils.computeTemperaturePairCurvePoints(
-                    temperaturePairs,
-                    true
-                ),
-                minTemperaturePoints = GraphUtils.computeTemperaturePairCurvePoints(
-                    temperaturePairs,
-                    false
-                )
-            )
-        }
-    }
-}
-
-@Composable
-fun DailyWeatherForecastList(dailyWeatherForecastList: List<DailyWeatherForecastBO>?) {
+fun DailyWeatherForecastList(dailyWeatherForecastList: List<WeatherForecastBO>?) {
     dailyWeatherForecastList?.let {
         LazyRow {
             items(it) { data ->
@@ -97,7 +66,7 @@ fun DailyWeatherForecastList(dailyWeatherForecastList: List<DailyWeatherForecast
 }
 
 @Composable
-fun DailyWeatherForecastItem(forecastItem: DailyWeatherForecastBO) {
+fun DailyWeatherForecastItem(forecastItem: WeatherForecastBO) {
     Column(
         Modifier.padding(TinyDimension),
         horizontalAlignment = Alignment.CenterHorizontally

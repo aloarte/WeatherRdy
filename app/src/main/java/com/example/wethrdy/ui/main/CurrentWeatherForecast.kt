@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import com.example.wethrdy.data.bo.CurrentForecastDetailsBO
+import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.main.WeatherForecastViewModel
 import com.example.wethrdy.ui.theme.MediumDimension
 
@@ -37,14 +37,13 @@ fun CurrentForecast(viewModel: WeatherForecastViewModel) {
 }
 
 @Composable
-fun CurrentForecastDetail(currentDetail: CurrentForecastDetailsBO?) {
+fun CurrentForecastDetail(currentDetail: WeatherForecastBO?) {
     Column {
         currentDetail?.let {
             Text(text = it.status.name, style = MaterialTheme.typography.h2)
             Text(text = it.humidity.toString(), style = MaterialTheme.typography.body1)
-            Text(text = it.temperature.toString(), style = MaterialTheme.typography.body1)
-            Text(text = it.maxTemperature.toString(), style = MaterialTheme.typography.body1)
-            Text(text = it.minTemperature.toString(), style = MaterialTheme.typography.body1)
+            Text(text = it.temperature.maxTemperature.toString(), style = MaterialTheme.typography.body1)
+            Text(text = it.temperature.minTemperature.toString(), style = MaterialTheme.typography.body1)
         }
     }
 }

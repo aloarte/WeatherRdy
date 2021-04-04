@@ -15,7 +15,7 @@
  */
 package com.example.wethrdy.main.graph
 
-import com.example.wethrdy.data.bo.TemperaturePair
+import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.cellSize
 import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.heightInterval
 import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.offsetBottom
@@ -25,13 +25,13 @@ object GraphUtils {
 
     object TemperatureGraphParameters {
         const val cellSize = 72
-        const val offsetTop = 56
-        const val offsetBottom = 32
-        const val heightInterval = 200
+        const val offsetTop = 120
+        const val offsetBottom = 10
+        const val heightInterval = 220
     }
 
     fun computeTemperaturePairCurvePoints(
-        temperaturePairs: List<TemperaturePair>,
+        temperaturePairs: List<WeatherForecastBO>,
         maxTemperature: Boolean
     ): GraphCurvePoints {
         val cellSize = cellSize
@@ -39,15 +39,15 @@ object GraphUtils {
         val chartHeight = heightInterval
         val chartTopPadding = offsetTop
         val curveBottomOffset = offsetBottom
-        val minY = temperaturePairs.minOf { it.minTemperature }
-        val maxY = temperaturePairs.maxOf { it.maxTemperature }
+        val minY = temperaturePairs.minOf { it.temperature.minTemperature }
+        val maxY = temperaturePairs.maxOf { it.temperature.maxTemperature }
         val heightStep =
             (chartHeight - (chartTopPadding + curveBottomOffset)) / (maxY - minY)
 
         val points = temperaturePairs.mapIndexed { index, item ->
             GraphPoint(
                 (index.toFloat() + 1) * cellSize,
-                ((maxY - if (maxTemperature) item.maxTemperature else item.minTemperature) * heightStep + offsetY).toFloat()
+                ((maxY - if (maxTemperature) item.temperature.maxTemperature else item.temperature.minTemperature) * heightStep + offsetY).toFloat()
             )
         }.toMutableList()
         points.add(0, points.first().copy(x = 0f))

@@ -15,4 +15,4 @@
  */
 package com.example.wethrdy.data.bo
 
-class TemperaturePair(val maxTemperature: Int, val minTemperature: Int)
+class TemperaturePairBO(val maxTemperature: Int, val minTemperature: Int)
