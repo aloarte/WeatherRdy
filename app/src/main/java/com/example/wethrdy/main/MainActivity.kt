@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import com.example.wethrdy.main.core.WeatherRdySurface
 import com.example.wethrdy.ui.main.CurrentForecast
 import com.example.wethrdy.ui.main.DailyWeatherForecast
-import com.example.wethrdy.ui.main.HourlyWeatherForecast
 import com.example.wethrdy.ui.theme.MyTheme
 import org.koin.android.ext.android.inject
 
@@ -53,8 +52,8 @@ fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
         Spacer(modifier = Modifier.height(10.dp))
         CurrentForecast(viewModel = forecastViewModel)
         Spacer(modifier = Modifier.height(10.dp))
-        HourlyWeatherForecast(viewModel = forecastViewModel)
-        Spacer(modifier = Modifier.height(10.dp))
+//        HourlyWeatherForecast(viewModel = forecastViewModel)
+//        Spacer(modifier = Modifier.height(10.dp))
         DailyWeatherForecast(viewModel = forecastViewModel)
     }
 }

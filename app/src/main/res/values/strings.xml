@@ -10,4 +10,13 @@
       the License.
       -->
     <string name="app_name">AndroidDevChallenge</string>
+    <string name="sunny">Sunny</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="rainy">Rainy</string>
+    <string name="rain_showers">Rain showers</string>
+    <string name="snowy">Snowy</string>
+    <string name="windy">Windy</string>
+    <string name="clear_night">Clear night</string>
+
+
 </resources>

@@ -16,8 +16,11 @@
 package com.example.wethrdy.ui.main
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,24 +30,67 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.main.WeatherForecastViewModel
+import com.example.wethrdy.main.core.HumidityLane
+import com.example.wethrdy.main.core.WeatherAnimation
+import com.example.wethrdy.main.core.WeatherUtils.getWeatherAnimation
+import com.example.wethrdy.main.core.WindLane
+import com.example.wethrdy.ui.theme.MediumDimension
 
 @Composable
 fun CurrentForecast(viewModel: WeatherForecastViewModel) {
     val currentWeatherForecast by viewModel.currentForecastDetail.observeAsState()
     val backgroundWeatherState by viewModel.backgroundState.observeAsState()
     ForecastSurface(Modifier, backgroundWeatherState) {
-        CurrentForecastDetail(currentWeatherForecast)
+        Column {
+            CurrentForecastDetail(currentWeatherForecast)
+            HourlyWeatherForecast(viewModel)
+        }
     }
 }
 
 @Composable
 fun CurrentForecastDetail(currentDetail: WeatherForecastBO?) {
-    Column(Modifier.fillMaxWidth().height(150.dp)) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .height(160.dp)
+            .padding(MediumDimension)
+    ) {
         currentDetail?.let {
-            Text(text = it.status.name, style = MaterialTheme.typography.h2)
-            Text(text = it.humidity.toString(), style = MaterialTheme.typography.body1)
-            Text(text = it.temperature.maxTemperature.toString(), style = MaterialTheme.typography.body1)
-            Text(text = it.temperature.minTemperature.toString(), style = MaterialTheme.typography.body1)
+            Column(Modifier.weight(2f)) {
+                CurrentDetailAnimationColumnContent(currentDetail)
+            }
+            Column(Modifier.weight(1f)) {
+                CurrentDetailSummaryContent(currentDetail)
+            }
         }
     }
+}
+
+@Composable
+fun CurrentDetailAnimationColumnContent(currentDetail: WeatherForecastBO) {
+    Text(text = currentDetail.status.name, style = MaterialTheme.typography.h1)
+    Spacer(modifier = Modifier.height(20.dp))
+    WeatherAnimation(
+        weather = getWeatherAnimation(
+            currentDetail.status,
+            currentDetail.hour
+        ),
+        animationSize = 120.dp
+    )
+}
+
+@Composable
+fun CurrentDetailSummaryContent(currentDetail: WeatherForecastBO) {
+    Spacer(modifier = Modifier.height(50.dp))
+    HumidityLane(humidity = currentDetail.humidity, size = 20)
+
+    Spacer(modifier = Modifier.height(5.dp))
+    WindLane(wind = currentDetail.wind, size = 20)
+
+    Spacer(modifier = Modifier.height(5.dp))
+    Text(
+        text = "${currentDetail.temperature.maxTemperature} º",
+        style = MaterialTheme.typography.body1
+    )
 }

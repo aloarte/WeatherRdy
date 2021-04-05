@@ -54,7 +54,7 @@ val typography = Typography(
     body1 = TextStyle(
         fontFamily = turretRoadFonts,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 18.sp
     ),
     button = TextStyle(
         fontFamily = turretRoadFonts,

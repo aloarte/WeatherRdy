@@ -35,6 +35,9 @@ import androidx.compose.ui.unit.dp
 import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.main.WeatherForecastViewModel
+import com.example.wethrdy.main.core.HumidityLane
+import com.example.wethrdy.main.core.MaxTemperatureLane
+import com.example.wethrdy.main.core.MinTemperatureLane
 import com.example.wethrdy.main.core.WeatherUtils
 import com.example.wethrdy.ui.theme.MediumDimension
 import com.example.wethrdy.ui.theme.TinyDimension
@@ -85,13 +88,8 @@ fun DailyWeatherForecastItem(forecastItem: WeatherForecastBO) {
                 .width(50.dp)
                 .height(50.dp)
         )
-        Text(
-            forecastItem.temperature.maxTemperature.toString(),
-            style = MaterialTheme.typography.body1
-        )
-        Text(
-            forecastItem.temperature.minTemperature.toString(),
-            style = MaterialTheme.typography.body1
-        )
+        MaxTemperatureLane(temperature = forecastItem.temperature.maxTemperature)
+        MinTemperatureLane(temperature = forecastItem.temperature.minTemperature)
+        HumidityLane(humidity = forecastItem.humidity, size = 15)
     }
 }
