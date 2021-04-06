@@ -16,9 +16,7 @@
 package com.example.wethrdy.data.bo.enums
 
 enum class Hour(val stringValue: String) {
-    NINE_PM("21:00"),
-    TEN_PM("22:00"),
-    ELEVEN_PM("23:00"),
+
     TWELVE_PM("00:00"),
     ONE_AM("01:00"),
     TWO_AM("02:00"),
@@ -39,5 +37,8 @@ enum class Hour(val stringValue: String) {
     FIVE_PM("17:00"),
     SIX_PM("18:00"),
     SEVEN_PM("19:00"),
-    EIGHT_PM("20:00");
+    EIGHT_PM("20:00"),
+    NINE_PM("21:00"),
+    TEN_PM("22:00"),
+    ELEVEN_PM("23:00");
 }

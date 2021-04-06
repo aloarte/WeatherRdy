@@ -91,7 +91,6 @@ fun HourlyWeatherForecastItem(forecastItem: WeatherForecastBO) {
         ) {
             HumidityLane(humidity = forecastItem.humidity, size = 15)
             WindLane(wind = forecastItem.wind, size = 15)
-
         }
 
         Text(
@@ -100,4 +99,3 @@ fun HourlyWeatherForecastItem(forecastItem: WeatherForecastBO) {
         )
     }
 }
-

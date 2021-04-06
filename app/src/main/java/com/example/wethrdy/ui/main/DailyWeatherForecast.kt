@@ -53,7 +53,6 @@ fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
     }
 }
 
-
 @Composable
 fun DailyWeatherGraph(
     dailyWeatherForecast: List<WeatherForecastBO>?,

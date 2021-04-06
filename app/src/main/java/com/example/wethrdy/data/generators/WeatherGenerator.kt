@@ -43,6 +43,7 @@ import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorPara
 import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.winterWeatherStatus
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.util.Calendar
 
 object WeatherGenerator {
 
@@ -115,7 +116,6 @@ object WeatherGenerator {
         val rainWind = 10..20
         val snowHumidity = 0..10
         val snowWind = 2..10
-
     }
 
     fun generateWeek(season: Season): List<WeatherForecastBO> {
@@ -126,9 +126,28 @@ object WeatherGenerator {
     }
 
     fun generateDay(season: Season): List<WeatherForecastBO> {
-        return Hour.values().map {
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val sortedHourList = sortHourList(Hour.values(), currentHour)
+        return sortedHourList.map {
             generateWeatherByHour(season, it)
         }
+    }
+
+    private fun sortHourList(values: Array<Hour>, currentHour: Int): List<Hour> {
+        val prevHours = mutableListOf<Hour>()
+        val nextHours = mutableListOf<Hour>()
+        var detected = values.first().stringValue.contains(currentHour.toString())
+        values.forEach {
+            if (detected) {
+                nextHours.add(it)
+            } else {
+                detected = it.stringValue.contains(currentHour.toString())
+                if (detected) nextHours.add(it)
+                else prevHours.add(it)
+            }
+        }
+        nextHours.addAll(prevHours)
+        return nextHours
     }
 
     private fun generateWeatherByDay(
@@ -150,7 +169,6 @@ object WeatherGenerator {
         )
     }
 
-
     private fun generateWeatherByHour(season: Season, hour: Hour): WeatherForecastBO {
         val weatherStatus = generateWeatherStatus(season)
         val temperaturePair = generateTemperaturePair(season)
@@ -165,7 +183,6 @@ object WeatherGenerator {
             wind = generateWind(weatherStatus)
         )
     }
-
 
     private fun generateTemperaturePair(season: Season): TemperaturePairBO {
         val minMeanTemperature = getMinMeanTemperatureBySeason(season)
