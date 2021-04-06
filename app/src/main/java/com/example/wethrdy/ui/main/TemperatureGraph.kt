@@ -182,7 +182,7 @@ fun TemperatureGraph(
                             val weatherPaint = Paint().apply {
                                 typeface = font
                                 textAlign = Paint.Align.CENTER
-                                textSize = 54f
+                                textSize = 40f
                                 color = weatherColor.toArgb()
                             }
                             val iconPaint = Paint().apply {
@@ -195,7 +195,7 @@ fun TemperatureGraph(
                             drawIntoCanvas { canvas ->
                                 // Draw hour
                                 canvas.nativeCanvas.drawText(
-                                    hour.stringValue,
+                                    day.name,
                                     maxTPoints[i].x,
                                     50F,
                                     weatherPaint

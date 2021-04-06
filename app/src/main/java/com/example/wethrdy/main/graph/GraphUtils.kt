@@ -24,7 +24,7 @@ import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.offs
 object GraphUtils {
 
     object TemperatureGraphParameters {
-        const val cellSize = 72
+        const val cellSize = 90
         const val offsetTop = 120
         const val offsetBottom = 10
         const val heightInterval = 220

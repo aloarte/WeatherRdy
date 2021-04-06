@@ -22,6 +22,16 @@ import com.example.wethrdy.data.bo.enums.WeatherStatus
 import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.autumnMeanMaxTemperature
 import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.autumnMeanMinTemperature
 import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.autumnWeatherStatus
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.clearHumidity
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.clearWind
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.cloudyHumidity
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.cloudyWind
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.rainHumidity
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.rainWind
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.showersHumidity
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.showersWind
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.snowHumidity
+import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.snowWind
 import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.springMeanMaxTemperature
 import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.springMeanMinTemperature
 import com.example.wethrdy.data.generators.WeatherGenerator.WeatherGeneratorParams.springWeatherStatus
@@ -94,6 +104,18 @@ object WeatherGenerator {
             WeatherStatus.SNOW,
             WeatherStatus.SNOW
         )
+
+        val clearHumidity = 0..20
+        val clearWind = 2..12
+        val cloudyHumidity = 20..50
+        val cloudyWind = 6..20
+        val showersHumidity = 20..50
+        val showersWind = 3..15
+        val rainHumidity = 60..80
+        val rainWind = 10..20
+        val snowHumidity = 0..10
+        val snowWind = 2..10
+
     }
 
     fun generateWeek(season: Season): List<WeatherForecastBO> {
@@ -114,38 +136,67 @@ object WeatherGenerator {
         day: DayOfWeek,
         date: LocalDate
     ): WeatherForecastBO {
-        val minMeanTemperature = getMinMeanTemperatureBySeason(season)
-        val maxMeanTemperature = getMaxMeanTemperatureBySeason(season)
+        val weatherStatus = generateWeatherStatus(season)
+        val temperaturePair = generateTemperaturePair(season)
         return WeatherForecastBO(
-            day,
-            date,
-            Hour.TWELVE_AM,
-            generateWeatherStatus(season),
-            TemperaturePairBO(
-                ((maxMeanTemperature - 5)..(maxMeanTemperature + 5)).random(),
-                ((minMeanTemperature - 5)..(minMeanTemperature + 5)).random()
-            ),
-            0, 0
+            day = day,
+            date = date,
+            hour = Hour.TWELVE_AM,
+            status = weatherStatus,
+            temperature = temperaturePair,
+            currentTemperature = (temperaturePair.minTemperature..temperaturePair.maxTemperature).random(),
+            humidity = generateHumidity(weatherStatus),
+            wind = generateWind(weatherStatus)
         )
     }
 
+
     private fun generateWeatherByHour(season: Season, hour: Hour): WeatherForecastBO {
+        val weatherStatus = generateWeatherStatus(season)
+        val temperaturePair = generateTemperaturePair(season)
+        return WeatherForecastBO(
+            day = DayOfWeek.MONDAY,
+            date = LocalDate.now(),
+            hour = hour,
+            status = weatherStatus,
+            temperature = temperaturePair,
+            currentTemperature = (temperaturePair.minTemperature..temperaturePair.maxTemperature).random(),
+            humidity = generateHumidity(weatherStatus),
+            wind = generateWind(weatherStatus)
+        )
+    }
+
+
+    private fun generateTemperaturePair(season: Season): TemperaturePairBO {
         val minMeanTemperature = getMinMeanTemperatureBySeason(season)
         val maxMeanTemperature = getMaxMeanTemperatureBySeason(season)
-        return WeatherForecastBO(
-            DayOfWeek.MONDAY,
-            LocalDate.now(),
-            hour,
-            generateWeatherStatus(season),
-            TemperaturePairBO(
-                ((maxMeanTemperature - 5)..(maxMeanTemperature + 5)).random(),
-                ((minMeanTemperature - 5)..(minMeanTemperature + 5)).random()
-            ),
-            0, 0
+        return TemperaturePairBO(
+            ((maxMeanTemperature - 5)..(maxMeanTemperature + 5)).random(),
+            ((minMeanTemperature - 5)..(minMeanTemperature + 5)).random()
         )
     }
 
     private fun generateWeatherStatus(season: Season) = getWeatherStatusBySeason(season).random()
+
+    private fun generateWind(weatherStatus: WeatherStatus): Int {
+        return when (weatherStatus) {
+            WeatherStatus.CLEAR -> clearWind.random()
+            WeatherStatus.CLOUDY -> cloudyWind.random()
+            WeatherStatus.SHOWERS -> showersWind.random()
+            WeatherStatus.RAIN -> rainWind.random()
+            WeatherStatus.SNOW -> snowWind.random()
+        }
+    }
+
+    private fun generateHumidity(weatherStatus: WeatherStatus): Int {
+        return when (weatherStatus) {
+            WeatherStatus.CLEAR -> clearHumidity.random()
+            WeatherStatus.CLOUDY -> cloudyHumidity.random()
+            WeatherStatus.SHOWERS -> showersHumidity.random()
+            WeatherStatus.RAIN -> rainHumidity.random()
+            WeatherStatus.SNOW -> snowHumidity.random()
+        }
+    }
 
     private fun getWeatherStatusBySeason(season: Season) = when (season) {
         Season.SPRING -> springWeatherStatus

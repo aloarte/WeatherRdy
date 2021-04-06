@@ -17,6 +17,8 @@
     <string name="snowy">Snowy</string>
     <string name="windy">Windy</string>
     <string name="clear_night">Clear night</string>
+    <string name="hourly_row_title">Hourly Forecast</string>
+    <string name="daily_row_title">Daily Forecast</string>
 
 
 </resources>

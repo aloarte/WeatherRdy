@@ -26,7 +26,7 @@ class WeatherForecastBO(
     val hour: Hour = Hour.TWELVE_AM,
     val status: WeatherStatus = WeatherStatus.CLEAR,
     val temperature: TemperaturePairBO = TemperaturePairBO(0, 0),
-    var precipitation: Int = 0,
+    val currentTemperature: Int = 0,
     var wind: Int = 0,
     var humidity: Int = 0
 )

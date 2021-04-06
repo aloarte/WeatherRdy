@@ -40,12 +40,11 @@ class WeatherForecastRepositoryImpl(
             DayOfWeek.MONDAY,
             LocalDate.of(2021, Month.MARCH, 28),
             Hour.TEN_AM,
-            status = WeatherStatus.CLOUDY,
+            status = WeatherStatus.CLEAR,
             temperature = TemperaturePairBO(
                 maxTemperature = 22,
                 minTemperature = 7
             ),
-            precipitation = 0,
             wind = 80,
             humidity = 57
         )
