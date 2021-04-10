@@ -44,7 +44,7 @@ fun DailyWeatherForecast(viewModel: WeatherForecastViewModel) {
     val dailyWeatherForecast by viewModel.dailyForecast.observeAsState()
     val backgroundWeatherState by viewModel.backgroundState.observeAsState()
 
-    ForecastSurface(backgroundWeatherState = backgroundWeatherState) {
+    ForecastSurface(Modifier.height(340.dp),backgroundWeatherState = backgroundWeatherState) {
         Column(modifier = Modifier.padding(MediumDimension)) {
             Text(stringResource(id = R.string.daily_row_title).toUpperCase(Locale.ROOT), style = MaterialTheme.typography.h2)
             Spacer(modifier = Modifier.height(15.dp))

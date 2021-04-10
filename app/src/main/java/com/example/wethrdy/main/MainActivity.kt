@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import com.example.wethrdy.main.core.WeatherRdySurface
 import com.example.wethrdy.ui.main.CurrentForecast
 import com.example.wethrdy.ui.main.DailyWeatherForecast
@@ -35,12 +36,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         setContent {
             MyTheme {
                 WeatherRdy(viewModel)
             }
         }
-
         viewModel.getCurrentWeatherForecast("Madrid")
     }
 }
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun WeatherRdy(forecastViewModel: WeatherForecastViewModel) {
     WeatherRdySurface(viewModel = forecastViewModel) {
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         CurrentForecast(viewModel = forecastViewModel)
         Spacer(modifier = Modifier.height(10.dp))
         DailyWeatherForecast(viewModel = forecastViewModel)
