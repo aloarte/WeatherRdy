@@ -11,8 +11,8 @@ Weather Rdy application displays the weather by hour and by day of the week, cha
 
 ![Alt Text](https://media.giphy.com/media/pp7aVSOyN5vOOTBheO/giphy.gif) ![Alt Text](https://media.giphy.com/media/V6I9K5hgPf8tsE3aRB/giphy.gif)
 
-<img src="results/capture_showers.png" width="260"> <img src="results/capture_snow_day.png" width="260"> 
-<img src="results/capture_sunny.png" width="260"> <img src="results/capture_cloudy_night.png" width="260">
+<img src="results/capture_showers.png" width="200"> <img src="results/capture_snow_day.png" width="200"> 
+<img src="results/capture_sunny.png" width="200"> <img src="results/capture_cloudy_night.png" width="200">
 
 
 ## License
