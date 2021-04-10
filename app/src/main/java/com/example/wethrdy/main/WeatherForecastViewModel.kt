@@ -24,6 +24,7 @@ import com.example.wethrdy.data.usecases.DailyWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.DetailCurrentWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.HourlyWeatherForecastUseCase
 import com.example.wethrdy.main.core.WeatherBackground
+import com.example.wethrdy.main.core.WeatherUtils.checkIfNightTime
 import com.example.wethrdy.main.core.WeatherUtils.getBackgroundState
 import kotlinx.coroutines.launch
 
@@ -59,14 +60,17 @@ class WeatherForecastViewModel(
 
     fun getCurrentWeatherForecast(country: String, nightMode: Boolean) {
 
-        detailCurrentWeatherUseCase.invoke(viewModelScope, params = country) {
-            _currentForecastDetail.value = it
-            _backgroundState.postValue(getBackgroundState(it, nightMode))
-        }
+//        detailCurrentWeatherUseCase.invoke(viewModelScope, params = country) {
+//            _currentForecastDetail.value = it
+//            _backgroundState.postValue(getBackgroundState(it, nightMode))
+//        }
         hourlyWeatherUseCase.invoke(viewModelScope, params = country) {
             _hourlyForecast.value = it
         }
         dailyWeatherUseCase.invoke(viewModelScope, params = country) {
+            val currentForecast =  it.first()
+            _currentForecastDetail.value = currentForecast
+            _backgroundState.postValue(getBackgroundState( currentForecast, checkIfNightTime(currentForecast.hour)))
             _dailyForecast.value = it
         }
     }

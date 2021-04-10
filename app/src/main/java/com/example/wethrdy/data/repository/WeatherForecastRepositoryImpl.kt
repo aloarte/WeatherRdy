@@ -39,7 +39,7 @@ class WeatherForecastRepositoryImpl(
         return WeatherForecastBO(
             DayOfWeek.MONDAY,
             LocalDate.of(2021, Month.MARCH, 28),
-            Hour.TEN_AM,
+            Hour.TEN_PM,
             status = WeatherStatus.CLEAR,
             temperature = TemperaturePairBO(
                 maxTemperature = 22,

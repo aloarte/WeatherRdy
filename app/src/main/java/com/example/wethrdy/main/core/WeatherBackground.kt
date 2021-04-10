@@ -16,5 +16,5 @@
 package com.example.wethrdy.main.core
 
 enum class WeatherBackground {
-    DAY, NIGHT, RAIN, SNOW, SNOW_NIGHT, CLOUDY
+    DAY, NIGHT, RAIN, SNOW, SNOW_NIGHT, CLOUDY, CLOUDY_NIGHT
 }

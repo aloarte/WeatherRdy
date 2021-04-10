@@ -30,26 +30,28 @@ import com.example.wethrdy.ui.theme.whiteTransparent
 object WeatherUtils {
 
     fun getWeatherIcon(weatherStatus: WeatherStatus, hour: Hour): Int {
-        val isDayTime = checkIfDayTime(hour)
+        val isNightTime = checkIfNightTime(hour)
         return when (weatherStatus) {
-            WeatherStatus.CLEAR -> if (isDayTime) R.drawable.ic_clear_day else R.drawable.ic_clear_night
-            WeatherStatus.CLOUDY -> if (isDayTime) R.drawable.ic_cloudy_day else R.drawable.ic_cloudy_night
-            WeatherStatus.SHOWERS -> if (isDayTime) R.drawable.ic_showers_day else R.drawable.ic_showers_night
-            WeatherStatus.RAIN -> if (isDayTime) R.drawable.ic_rain_day else R.drawable.ic_rain_night
-            WeatherStatus.SNOW -> if (isDayTime) R.drawable.ic_snow_day else R.drawable.ic_snow_night
+            WeatherStatus.CLEAR -> if (isNightTime) R.drawable.ic_clear_night else R.drawable.ic_clear_day
+            WeatherStatus.CLOUDY -> if (isNightTime) R.drawable.ic_cloudy_night else R.drawable.ic_cloudy_day
+            WeatherStatus.SHOWERS -> if (isNightTime) R.drawable.ic_showers_night else R.drawable.ic_showers_day
+            WeatherStatus.RAIN -> if (isNightTime) R.drawable.ic_rain_night else R.drawable.ic_rain_day
+            WeatherStatus.SNOW -> if (isNightTime) R.drawable.ic_snow_night else R.drawable.ic_snow_day
         }
     }
 
-    fun checkIfDayTime(hour: Hour) = hour.ordinal !in 1..12
+    fun checkIfNightTime(hour: Hour) = hour.ordinal !in 9..21
 
     fun getBackground(backgroundWeatherState: WeatherBackground?) = when (backgroundWeatherState) {
-        WeatherBackground.DAY -> R.mipmap.background_day_8bit
-        WeatherBackground.NIGHT -> R.mipmap.background_night_8bit
-        WeatherBackground.RAIN -> R.mipmap.background_rainy_8bit
-        WeatherBackground.SNOW -> R.mipmap.background_snow_8bit
-        WeatherBackground.SNOW_NIGHT -> R.mipmap.background_snow_night_8bit
-        WeatherBackground.CLOUDY -> R.mipmap.background_cloudy_8bit
-        else -> R.mipmap.background_day_8bit
+        WeatherBackground.DAY -> R.mipmap.background_day
+        WeatherBackground.NIGHT -> R.mipmap.background_night
+        WeatherBackground.RAIN -> R.mipmap.background_rainy
+        WeatherBackground.SNOW -> R.mipmap.background_snow_day
+        WeatherBackground.SNOW_NIGHT -> R.mipmap.background_snow_night
+        WeatherBackground.CLOUDY -> R.mipmap.background_cloudy_day
+        WeatherBackground.CLOUDY_NIGHT -> R.mipmap.background_cloudy_night
+
+        else -> R.mipmap.background_day
     }
 
     fun getBackgroundState(
@@ -58,7 +60,7 @@ object WeatherUtils {
     ): WeatherBackground = when (forecastDetails.status) {
         WeatherStatus.CLEAR -> if (nightMode) WeatherBackground.NIGHT else WeatherBackground.DAY
         WeatherStatus.SHOWERS, WeatherStatus.RAIN -> WeatherBackground.RAIN
-        WeatherStatus.CLOUDY -> WeatherBackground.CLOUDY
+        WeatherStatus.CLOUDY -> if (nightMode) WeatherBackground.CLOUDY_NIGHT else WeatherBackground.CLOUDY
         WeatherStatus.SNOW -> if (nightMode) WeatherBackground.SNOW_NIGHT else WeatherBackground.SNOW
     }
 
@@ -85,9 +87,9 @@ object WeatherUtils {
         }
 
     fun getWeatherAnimation(weatherStatus: WeatherStatus, hour: Hour): WeatherAnimationState {
-        val isDayTime = checkIfDayTime(hour)
+        val isNightTime = checkIfNightTime(hour)
         return when (weatherStatus) {
-            WeatherStatus.CLEAR -> if (isDayTime) WeatherAnimationState.SUNNY else WeatherAnimationState.CLEAR_NIGHT
+            WeatherStatus.CLEAR -> if (isNightTime) WeatherAnimationState.CLEAR_NIGHT else WeatherAnimationState.SUNNY
             WeatherStatus.CLOUDY -> WeatherAnimationState.CLOUDY
             WeatherStatus.SHOWERS -> WeatherAnimationState.RAIN_SHOWERS
             WeatherStatus.RAIN -> WeatherAnimationState.RAINY

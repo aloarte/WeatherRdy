@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val nightMode = true
+        val nightMode = false
         setContent {
             MyTheme {
                 WeatherRdy(viewModel)
