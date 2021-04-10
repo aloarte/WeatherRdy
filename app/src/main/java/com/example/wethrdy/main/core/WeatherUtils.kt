@@ -43,7 +43,7 @@ object WeatherUtils {
         }
     }
 
-    fun checkIfNightTime(hour: Hour) = hour.ordinal !in 9..21
+    fun checkIfNightTime(hour: Hour) = hour.ordinal in 9..21
 
     fun getBackground(backgroundWeatherState: WeatherBackground?) = when (backgroundWeatherState) {
         WeatherBackground.DAY -> R.mipmap.background_day

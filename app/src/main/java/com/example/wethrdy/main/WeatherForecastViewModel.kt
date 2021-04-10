@@ -31,7 +31,7 @@ class WeatherForecastViewModel(
     private val hourlyWeatherUseCase: HourlyWeatherForecastUseCase,
     private val dailyWeatherUseCase: DailyWeatherForecastUseCase,
 
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _cities = MutableLiveData<List<String>>(listOf())
     val cities: LiveData<List<String>> = _cities

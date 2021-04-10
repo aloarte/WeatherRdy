@@ -1,20 +1,18 @@
-# Put title of your app here
+# Weather Rdy
+
+Kotlin application that uses Jetpack-compose to build its views. This is part of the android developers challenge number 4: build a weather application.
 
 ![Workflow result](https://github.com/aloarte/WeatherRdy/workflows/Check/badge.svg)
 
-
 ## :scroll: Description
-<!--- Describe your app in one or two sentences -->
-
-
-## :bulb: Motivation and Context
-<!--- Optionally point readers to interesting parts of your submission. -->
-<!--- What are you especially proud of? -->
-
+Weather Rdy application displays the weather by hour and by day of the week, changing the background and animation based on the current weather and day/night time.
 
 ## :camera_flash: Screenshots
-<!-- You can add more screenshots here if you like -->
-<img src="/results/screenshot_1.png" width="260">&emsp;<img src="/results/screenshot_2.png" width="260">
+
+![Alt Text](https://media.giphy.com/media/pp7aVSOyN5vOOTBheO/giphy.gif) ![Alt Text](https://media.giphy.com/media/V6I9K5hgPf8tsE3aRB/giphy.gif)
+
+<img src="results/capture_showers.png" width="260"><img src="results/capture_snow_day.png" width="260"><img src="results/capture_sunny.png" width="260"><img src="results/capture_cloudy_night.png" width="260">
+
 
 ## License
 ```

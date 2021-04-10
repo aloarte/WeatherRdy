@@ -48,5 +48,4 @@ val repositoriesModule = module {
 }
 
 val networkingModule = module {
-
 }

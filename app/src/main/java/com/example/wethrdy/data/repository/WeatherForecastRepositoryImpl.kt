@@ -32,7 +32,7 @@ class WeatherForecastRepositoryImpl(
     private val localSource: LocalWeatherForecastSource,
     private val remoteSource: WeatherForecastSource,
 
-    ) : WeatherForecastRepository {
+) : WeatherForecastRepository {
 
     override suspend fun getCurrentForecastDetails(city: String): WeatherForecastBO {
         localSource.getForecastByLocation(city)
@@ -52,11 +52,11 @@ class WeatherForecastRepositoryImpl(
 
     override suspend fun getDailyForecast(city: String): List<WeatherForecastBO> {
         localSource.getForecastByLocation(city)
-        return generateWeek(Season.WINTER)
+        return generateWeek(Season.AUTUMN)
     }
 
     override suspend fun getHourlyForecast(city: String): List<WeatherForecastBO> {
         localSource.getForecastByLocation(city)
-        return generateDay(Season.WINTER)
+        return generateDay(Season.AUTUMN)
     }
 }
