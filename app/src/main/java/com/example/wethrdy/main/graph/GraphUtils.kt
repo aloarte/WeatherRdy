@@ -27,7 +27,7 @@ object GraphUtils {
         const val cellSize = 90
         const val offsetTop = 120
         const val offsetBottom = 10
-        const val heightInterval = 220
+        const val heightInterval = 260
     }
 
     fun computeTemperaturePairCurvePoints(

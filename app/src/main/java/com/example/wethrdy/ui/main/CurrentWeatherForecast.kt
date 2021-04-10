@@ -53,7 +53,7 @@ fun CurrentForecastDetail(currentDetail: WeatherForecastBO?) {
     Row(
         Modifier
             .fillMaxWidth()
-            .height(160.dp)
+            .height(140.dp)
             .padding(MediumDimension)
     ) {
         currentDetail?.let {
@@ -76,13 +76,13 @@ fun CurrentDetailAnimationColumnContent(currentDetail: WeatherForecastBO) {
             currentDetail.status,
             currentDetail.hour
         ),
-        animationSize = 120.dp
+        animationSize = 100.dp
     )
 }
 
 @Composable
 fun CurrentDetailSummaryContent(currentDetail: WeatherForecastBO) {
-    Spacer(modifier = Modifier.height(50.dp))
+    Spacer(modifier = Modifier.height(35.dp))
     HumidityLane(humidity = currentDetail.humidity, size = 20)
 
     Spacer(modifier = Modifier.height(5.dp))

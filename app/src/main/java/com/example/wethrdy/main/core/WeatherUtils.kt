@@ -20,7 +20,10 @@ import com.example.wethrdy.R
 import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.data.bo.enums.Hour
 import com.example.wethrdy.data.bo.enums.WeatherStatus
-import com.example.wethrdy.ui.theme.brownContent
+import com.example.wethrdy.ui.theme.colorMaxTemperature
+import com.example.wethrdy.ui.theme.colorMaxTemperatureContrast
+import com.example.wethrdy.ui.theme.colorMinTemperature
+import com.example.wethrdy.ui.theme.colorMinTemperatureContrast
 import com.example.wethrdy.ui.theme.darkGrayTransparent20
 import com.example.wethrdy.ui.theme.darkGrayTransparent40
 import com.example.wethrdy.ui.theme.grayTransparent
@@ -50,7 +53,6 @@ object WeatherUtils {
         WeatherBackground.SNOW_NIGHT -> R.mipmap.background_snow_night
         WeatherBackground.CLOUDY -> R.mipmap.background_cloudy_day
         WeatherBackground.CLOUDY_NIGHT -> R.mipmap.background_cloudy_night
-
         else -> R.mipmap.background_day
     }
 
@@ -72,6 +74,7 @@ object WeatherUtils {
             WeatherBackground.SNOW -> whiteIntenseTransparent
             WeatherBackground.SNOW_NIGHT -> grayTransparent
             WeatherBackground.CLOUDY -> whiteTransparent
+            WeatherBackground.CLOUDY_NIGHT -> whiteTransparent
             else -> Color.Black
         }
 
@@ -80,9 +83,35 @@ object WeatherUtils {
             WeatherBackground.DAY -> Color.Black
             WeatherBackground.NIGHT -> Color.White
             WeatherBackground.RAIN -> Color.White
-            WeatherBackground.SNOW -> brownContent
+            WeatherBackground.SNOW -> Color.Black
             WeatherBackground.SNOW_NIGHT -> Color.White
-            WeatherBackground.CLOUDY -> Color.White
+            WeatherBackground.CLOUDY -> Color.Black
+            WeatherBackground.CLOUDY_NIGHT -> Color.White
+            else -> Color.Black
+        }
+
+    fun getMaxTemperatureColorByState(backgroundWeatherState: WeatherBackground?) =
+        when (backgroundWeatherState) {
+            WeatherBackground.DAY -> colorMaxTemperatureContrast
+            WeatherBackground.NIGHT -> colorMaxTemperature
+            WeatherBackground.RAIN -> colorMaxTemperature
+            WeatherBackground.SNOW -> colorMaxTemperatureContrast
+            WeatherBackground.SNOW_NIGHT -> colorMaxTemperature
+            WeatherBackground.CLOUDY -> colorMaxTemperatureContrast
+            WeatherBackground.CLOUDY_NIGHT -> colorMaxTemperature
+            else -> colorMaxTemperature
+        }
+
+    fun getMinTemperatureColorByState(backgroundWeatherState: WeatherBackground?) =
+        when (backgroundWeatherState) {
+            WeatherBackground.DAY -> colorMinTemperatureContrast
+            WeatherBackground.NIGHT -> colorMinTemperature
+            WeatherBackground.RAIN -> colorMinTemperature
+            WeatherBackground.SNOW -> colorMinTemperatureContrast
+            WeatherBackground.SNOW_NIGHT -> colorMinTemperature
+            WeatherBackground.CLOUDY -> colorMinTemperatureContrast
+            WeatherBackground.CLOUDY_NIGHT -> colorMinTemperature
+
             else -> Color.Black
         }
 
@@ -90,7 +119,7 @@ object WeatherUtils {
         val isNightTime = checkIfNightTime(hour)
         return when (weatherStatus) {
             WeatherStatus.CLEAR -> if (isNightTime) WeatherAnimationState.CLEAR_NIGHT else WeatherAnimationState.SUNNY
-            WeatherStatus.CLOUDY -> WeatherAnimationState.CLOUDY
+            WeatherStatus.CLOUDY -> if (isNightTime) WeatherAnimationState.CLEAR_NIGHT else WeatherAnimationState.CLOUDY
             WeatherStatus.SHOWERS -> WeatherAnimationState.RAIN_SHOWERS
             WeatherStatus.RAIN -> WeatherAnimationState.RAINY
             WeatherStatus.SNOW -> WeatherAnimationState.SNOWY

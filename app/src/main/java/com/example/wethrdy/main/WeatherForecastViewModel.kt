@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wethrdy.data.bo.WeatherForecastBO
 import com.example.wethrdy.data.usecases.DailyWeatherForecastUseCase
-import com.example.wethrdy.data.usecases.DetailCurrentWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.HourlyWeatherForecastUseCase
 import com.example.wethrdy.main.core.WeatherBackground
 import com.example.wethrdy.main.core.WeatherUtils.checkIfNightTime
@@ -29,11 +28,10 @@ import com.example.wethrdy.main.core.WeatherUtils.getBackgroundState
 import kotlinx.coroutines.launch
 
 class WeatherForecastViewModel(
-    private val detailCurrentWeatherUseCase: DetailCurrentWeatherForecastUseCase,
     private val hourlyWeatherUseCase: HourlyWeatherForecastUseCase,
     private val dailyWeatherUseCase: DailyWeatherForecastUseCase,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     private val _cities = MutableLiveData<List<String>>(listOf())
     val cities: LiveData<List<String>> = _cities
@@ -58,19 +56,21 @@ class WeatherForecastViewModel(
         _backgroundState.postValue(newState)
     }
 
-    fun getCurrentWeatherForecast(country: String, nightMode: Boolean) {
+    fun getCurrentWeatherForecast(country: String) {
 
-//        detailCurrentWeatherUseCase.invoke(viewModelScope, params = country) {
-//            _currentForecastDetail.value = it
-//            _backgroundState.postValue(getBackgroundState(it, nightMode))
-//        }
         hourlyWeatherUseCase.invoke(viewModelScope, params = country) {
+            val currentForecast = it.first()
+            _currentForecastDetail.value = currentForecast
+            _backgroundState.postValue(
+                getBackgroundState(
+                    currentForecast,
+                    checkIfNightTime(currentForecast.hour)
+                )
+            )
             _hourlyForecast.value = it
         }
         dailyWeatherUseCase.invoke(viewModelScope, params = country) {
-            val currentForecast =  it.first()
-            _currentForecastDetail.value = currentForecast
-            _backgroundState.postValue(getBackgroundState( currentForecast, checkIfNightTime(currentForecast.hour)))
+
             _dailyForecast.value = it
         }
     }

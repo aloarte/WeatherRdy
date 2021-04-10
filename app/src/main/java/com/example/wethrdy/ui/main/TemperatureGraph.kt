@@ -44,12 +44,12 @@ import com.example.wethrdy.data.bo.enums.WeatherStatus
 import com.example.wethrdy.main.core.WeatherBackground
 import com.example.wethrdy.main.core.WeatherUtils
 import com.example.wethrdy.main.core.WeatherUtils.getContentColorByState
+import com.example.wethrdy.main.core.WeatherUtils.getMaxTemperatureColorByState
+import com.example.wethrdy.main.core.WeatherUtils.getMinTemperatureColorByState
 import com.example.wethrdy.main.graph.GraphCurvePoints
 import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.cellSize
 import com.example.wethrdy.main.graph.GraphUtils.TemperatureGraphParameters.heightInterval
 import com.example.wethrdy.main.graph.GraphUtils.computeTemperaturePairCurvePoints
-import com.example.wethrdy.ui.theme.colorMaxTemperature
-import com.example.wethrdy.ui.theme.colorMinTemperature
 import java.time.DayOfWeek
 
 @Composable
@@ -60,8 +60,9 @@ fun TemperatureGraph(
     weatherBackground: WeatherBackground
 ) {
 
-    val curveColorMax = colorMaxTemperature
-    val curveColorMin = colorMinTemperature
+    val curveColorMax = getMaxTemperatureColorByState(weatherBackground)
+
+    val curveColorMin = getMinTemperatureColorByState(weatherBackground)
     val weatherColor = getContentColorByState(weatherBackground)
     val chartHeight = heightInterval
     val dpPerCell = cellSize

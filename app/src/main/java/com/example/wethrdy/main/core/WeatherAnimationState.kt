@@ -42,6 +42,6 @@ enum class WeatherAnimationState(@StringRes val description: Int, @RawRes val an
     ),
     CLEAR_NIGHT(
         description = R.string.clear_night,
-        animation = R.raw.moon
+        animation = R.raw.night
     )
 }

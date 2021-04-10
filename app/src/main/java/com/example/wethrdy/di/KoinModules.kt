@@ -22,7 +22,6 @@ import com.example.wethrdy.data.source.LocalWeatherForecastSource
 import com.example.wethrdy.data.source.WeatherForecastDatasourceImpl
 import com.example.wethrdy.data.source.WeatherForecastSource
 import com.example.wethrdy.data.usecases.DailyWeatherForecastUseCase
-import com.example.wethrdy.data.usecases.DetailCurrentWeatherForecastUseCase
 import com.example.wethrdy.data.usecases.HourlyWeatherForecastUseCase
 import com.example.wethrdy.main.WeatherForecastViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -32,7 +31,7 @@ import org.koin.dsl.module
 val appModule = module {
 }
 val viewModelModule = module {
-    viewModel { WeatherForecastViewModel(get(), get(), get()) }
+    viewModel { WeatherForecastViewModel(get(), get()) }
 }
 val dataSourcesModule = module {
     factory<LocalWeatherForecastSource> { (LocalWeatherForecastDatasourceImpl()) }
@@ -40,7 +39,6 @@ val dataSourcesModule = module {
 }
 
 val useCaseModule = module {
-    factory { DetailCurrentWeatherForecastUseCase(get()) }
     factory { DailyWeatherForecastUseCase(get()) }
     factory { HourlyWeatherForecastUseCase(get()) }
 }
@@ -50,22 +48,5 @@ val repositoriesModule = module {
 }
 
 val networkingModule = module {
-//        single { GsonConverterFactory.create() as Converter.Factory }
-//        single { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) as Interceptor }
-//        single {
-//            OkHttpClient.Builder().apply {
-//                if (BuildConfig.DEBUG) addInterceptor(get())
-//                    .callTimeout(10, TimeUnit.SECONDS)
-//            }.build()
-//        }
-//        single {
-//            Retrofit.Builder()
-//                .baseUrl(BuildConfig.HOST)
-//                .client(get())
-//                .addConverterFactory(get())
-//                .build()
-//        }
-//        single { get<Retrofit>().create(LoginService::class.java) }
-//        single { get<Retrofit>().create(BlockService::class.java) }
-//        single { get<Retrofit>().create(ForgotPasswordService::class.java) }
+
 }
